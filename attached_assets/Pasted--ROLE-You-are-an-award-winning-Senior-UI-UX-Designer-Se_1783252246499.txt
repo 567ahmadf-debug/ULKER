@@ -1,0 +1,691 @@
+# ROLE
+
+You are an award-winning Senior UI/UX Designer, Senior Product Designer, and Senior Full Stack Engineer.
+
+Your task is to create a COMPLETE production-ready responsive website.
+
+Do NOT simplify anything.
+
+Do NOT redesign the layout.
+
+Do NOT create your own interpretation.
+
+The website must match the uploaded reference image as closely as possible in layout, proportions, spacing, hierarchy, typography, colors, shadows, and premium visual quality.
+
+The only intentional change is:
+
+REMOVE THE 3D PRODUCT VIEWER.
+
+Replace it with a premium ultra-high-resolution product image gallery.
+
+------------------------------------------------------------
+
+PROJECT
+
+ÜLKER DIGITAL PRODUCT CATALOG
+
+------------------------------------------------------------
+
+IMPORTANT
+
+This is NOT an e-commerce website.
+
+There is:
+
+• NO shopping cart
+• NO prices
+• NO checkout
+• NO payment
+• NO wishlist
+• NO customer accounts
+
+The website is only a premium digital catalog.
+
+Users can browse products, read specifications, and check availability.
+
+------------------------------------------------------------
+
+DESIGN STYLE
+
+Create a luxury enterprise website.
+
+The quality should feel like:
+
+Apple
+Samsung
+Nike
+Sony
+
+Minimal.
+
+Elegant.
+
+Corporate.
+
+Premium.
+
+Modern.
+
+Extremely clean.
+
+Lots of whitespace.
+
+Perfect spacing.
+
+Perfect alignment.
+
+Soft shadows.
+
+Rounded corners.
+
+Micro animations.
+
+Glassmorphism only where appropriate.
+
+Every component must feel handcrafted.
+
+------------------------------------------------------------
+
+COLOR PALETTE
+
+Primary
+
+Deep Burgundy
+
+Dark Wine Red
+
+Secondary
+
+Cream White
+
+Warm White
+
+Light Beige
+
+Accent
+
+Gold
+
+Green
+
+Red
+
+Gray
+
+Background
+
+Very light warm white.
+
+Cards
+
+Pure white.
+
+------------------------------------------------------------
+
+TYPOGRAPHY
+
+Use Inter.
+
+Large headings.
+
+Medium body text.
+
+Excellent readability.
+
+Generous spacing.
+
+------------------------------------------------------------
+
+RESPONSIVE
+
+The website must be fully responsive.
+
+Desktop
+
+Laptop
+
+Tablet
+
+Mobile
+
+Do NOT simply shrink desktop.
+
+Create a dedicated mobile experience.
+
+------------------------------------------------------------
+
+NAVIGATION BAR
+
+Sticky.
+
+Transparent on top.
+
+Solid while scrolling.
+
+Contains
+
+Ülker Logo
+
+Home
+
+Products
+
+Categories
+
+Quality
+
+Sustainability
+
+About
+
+Contact
+
+Search
+
+Language Selector
+
+Dark Mode Toggle
+
+------------------------------------------------------------
+
+HOME PAGE
+
+Hero section
+
+Large marketing headline.
+
+Example
+
+Explore Every Ülker Product
+
+Subtitle
+
+Discover complete product information, ingredients, nutritional values, packaging details, and real-time availability.
+
+Buttons
+
+Browse Products
+
+View Categories
+
+Hero image
+
+Display one premium studio-quality product image.
+
+Not 3D.
+
+Use subtle floating animation.
+
+------------------------------------------------------------
+
+PRODUCTS PAGE
+
+Modern sidebar.
+
+Categories
+
+Biscuits
+
+Chocolate
+
+Wafer
+
+Cookies
+
+Cake
+
+Crackers
+
+Candy
+
+Snacks
+
+Search bar.
+
+Filters
+
+Availability
+
+Category
+
+Weight
+
+Package
+
+Newest
+
+Popular
+
+Grid layout.
+
+Every card contains
+
+Product Image
+
+Product Name
+
+Category
+
+Availability Badge
+
+View Details
+
+Hover animation
+
+------------------------------------------------------------
+
+PRODUCT DETAILS PAGE
+
+This page must closely match the uploaded reference image.
+
+Layout
+
+Left Sidebar
+
+Main Product Section
+
+Information Panel
+
+Related Products
+
+Footer
+
+------------------------------------------------------------
+
+MAIN PRODUCT AREA
+
+Replace the 3D viewer with:
+
+An ultra-high-resolution product image.
+
+The product should sit on a premium circular podium exactly like the reference image.
+
+Below the main image create an image gallery.
+
+Gallery thumbnails
+
+Front
+
+Back
+
+Side
+
+Packaging
+
+Nutrition Label
+
+Zoomed Detail
+
+Clicking a thumbnail updates the main image.
+
+Add smooth fade transitions.
+
+Allow image zoom on hover (desktop).
+
+Allow pinch zoom on mobile.
+
+------------------------------------------------------------
+
+RIGHT INFORMATION PANEL
+
+Display
+
+Product Name
+
+Short Description
+
+Stock Status
+
+Packaging Information
+
+Nutrition Facts
+
+Ingredients
+
+Allergen Information
+
+Product Description
+
+Barcode
+
+SKU
+
+Country
+
+Shelf Life
+
+Everything organized inside elegant cards.
+
+------------------------------------------------------------
+
+STOCK STATUS CARD
+
+Display one of three states
+
+🟢 In Stock
+
+Available
+
+Updated just now
+
+🟠 Limited Stock
+
+Only few cartons available
+
+🔴 Out of Stock
+
+Currently unavailable
+
+Use beautiful colored indicators.
+
+------------------------------------------------------------
+
+PACKAGING INFORMATION
+
+Display
+
+Weight
+
+Pieces
+
+Carton Quantity
+
+Package Type
+
+Dimensions
+
+------------------------------------------------------------
+
+NUTRITION CARD
+
+Expandable.
+
+Display
+
+Calories
+
+Protein
+
+Fat
+
+Saturated Fat
+
+Carbohydrates
+
+Sugar
+
+Fiber
+
+Salt
+
+Serving Size
+
+Per 100g
+
+------------------------------------------------------------
+
+INGREDIENTS CARD
+
+Expandable.
+
+Beautiful typography.
+
+------------------------------------------------------------
+
+ALLERGEN CARD
+
+Display badges
+
+Contains
+
+Milk
+
+Gluten
+
+Soy
+
+May contain
+
+Nuts
+
+Sesame
+
+Eggs
+
+------------------------------------------------------------
+
+PRODUCT DESCRIPTION
+
+Professional formatted text.
+
+Explain
+
+Taste
+
+Texture
+
+Packaging
+
+Storage
+
+Serving suggestions
+
+------------------------------------------------------------
+
+RELATED PRODUCTS
+
+Responsive carousel.
+
+Each card
+
+Image
+
+Name
+
+Category
+
+Availability
+
+Hover animation
+
+------------------------------------------------------------
+
+SEARCH
+
+Instant search.
+
+Autocomplete.
+
+Suggestions.
+
+------------------------------------------------------------
+
+FOOTER
+
+Exactly like premium corporate websites.
+
+Columns
+
+Products
+
+Company
+
+Support
+
+Contact
+
+Social Media
+
+Copyright
+
+------------------------------------------------------------
+
+MOBILE DESIGN
+
+The mobile version is extremely important.
+
+Do NOT copy desktop.
+
+Optimize every section.
+
+Bottom Navigation
+
+Home
+
+Categories
+
+Search
+
+Products
+
+More
+
+Cards should stack naturally.
+
+Buttons must be thumb-friendly.
+
+Gallery should become swipeable.
+
+Accordion sections should animate smoothly.
+
+Everything should feel like a native iOS application.
+
+------------------------------------------------------------
+
+ANIMATIONS
+
+Smooth page transitions.
+
+Fade.
+
+Slide.
+
+Scale.
+
+Hover.
+
+Micro interactions.
+
+Loading skeletons.
+
+Lazy image loading.
+
+Floating hero image.
+
+Premium scroll animations.
+
+------------------------------------------------------------
+
+PERFORMANCE
+
+Responsive.
+
+Accessible.
+
+SEO optimized.
+
+Fast loading.
+
+Lazy loading.
+
+Optimized images.
+
+------------------------------------------------------------
+
+TECH STACK
+
+Frontend
+
+React
+
+TypeScript
+
+Vite
+
+Tailwind CSS
+
+React Router
+
+Framer Motion
+
+Backend
+
+Spring Boot
+
+REST API
+
+JWT
+
+MySQL
+
+------------------------------------------------------------
+
+ADMIN PANEL
+
+Create a complete admin dashboard.
+
+Manage
+
+Products
+
+Categories
+
+Images
+
+Stock Status
+
+Nutrition
+
+Ingredients
+
+Allergens
+
+Users
+
+Search
+
+Analytics
+
+------------------------------------------------------------
+
+DATABASE
+
+Design a normalized MySQL database.
+
+Products
+
+Categories
+
+Images
+
+Nutrition
+
+Ingredients
+
+Allergens
+
+Stock
+
+Warehouses
+
+Users
+
+------------------------------------------------------------
+
+IMPORTANT
+
+The uploaded reference image defines the visual language.
+
+The generated website should preserve the same composition, spacing, proportions, typography hierarchy, colors, and premium feeling.
+
+Do not create a different layout.
+
+Do not simplify components.
+
+Do not remove information cards.
+
+Do not convert this into an online store.
+
+This is a luxury digital product catalog only.
+
+Replace only the interactive 3D product viewer with a premium high-resolution image gallery while preserving the overall page composition.
