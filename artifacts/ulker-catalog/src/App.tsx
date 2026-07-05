@@ -8,7 +8,6 @@ import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import HomePage from "@/pages/HomePage";
 import ProductsPage from "@/pages/ProductsPage";
 import ProductDetailPage from "@/pages/ProductDetailPage";
-import CategoriesPage from "@/pages/CategoriesPage";
 import QualityPage from "@/pages/QualityPage";
 import SustainabilityPage from "@/pages/SustainabilityPage";
 import AboutPage from "@/pages/AboutPage";
@@ -25,7 +24,6 @@ function Router() {
         <Route path="/" component={HomePage} />
         <Route path="/products" component={ProductsPage} />
         <Route path="/products/:id" component={ProductDetailPage} />
-        <Route path="/categories" component={CategoriesPage} />
         <Route path="/quality" component={QualityPage} />
         <Route path="/sustainability" component={SustainabilityPage} />
         <Route path="/about" component={AboutPage} />

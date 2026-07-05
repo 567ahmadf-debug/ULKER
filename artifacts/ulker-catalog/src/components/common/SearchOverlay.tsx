@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Search, X, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { products } from "@/data/products";
+import { useTranslation } from "react-i18next";
 
 interface SearchOverlayProps {
   open: boolean;
@@ -12,6 +13,7 @@ interface SearchOverlayProps {
 export default function SearchOverlay({ open, onClose }: SearchOverlayProps) {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (open) {
@@ -30,12 +32,14 @@ export default function SearchOverlay({ open, onClose }: SearchOverlayProps) {
   }, [onClose]);
 
   const results = query.trim().length >= 2
-    ? products.filter(
-        (p) =>
-          p.name.toLowerCase().includes(query.toLowerCase()) ||
-          p.category.toLowerCase().includes(query.toLowerCase()) ||
-          p.shortDescription.toLowerCase().includes(query.toLowerCase())
-      ).slice(0, 6)
+    ? products
+        .filter(
+          (p) =>
+            p.name.toLowerCase().includes(query.toLowerCase()) ||
+            p.category.toLowerCase().includes(query.toLowerCase()) ||
+            p.shortDescription.toLowerCase().includes(query.toLowerCase())
+        )
+        .slice(0, 6)
     : [];
 
   const suggestions = ["Petibör", "Chocolate", "Wafer", "Albeni", "Biskrem", "Crackers"];
@@ -59,7 +63,6 @@ export default function SearchOverlay({ open, onClose }: SearchOverlayProps) {
             className="w-full max-w-2xl bg-card shadow-2xl"
             style={{ borderRadius: "0 0 16px 16px" }}
           >
-            {/* Search input */}
             <div className="flex items-center gap-3 px-5 py-4 border-b border-border">
               <Search size={20} className="text-muted-foreground shrink-0" />
               <input
@@ -67,7 +70,7 @@ export default function SearchOverlay({ open, onClose }: SearchOverlayProps) {
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search products, categories..."
+                placeholder={t("search.placeholder")}
                 data-testid="input-search"
                 className="flex-1 bg-transparent text-base font-medium text-foreground placeholder:text-muted-foreground outline-none"
               />
@@ -81,11 +84,10 @@ export default function SearchOverlay({ open, onClose }: SearchOverlayProps) {
             </div>
 
             <div className="px-5 py-4 max-h-[60vh] overflow-y-auto">
-              {/* Suggestions */}
               {query.length < 2 && (
                 <div>
                   <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
-                    Popular searches
+                    {t("search.popular_searches")}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {suggestions.map((s) => (
@@ -102,11 +104,10 @@ export default function SearchOverlay({ open, onClose }: SearchOverlayProps) {
                 </div>
               )}
 
-              {/* Results */}
               {results.length > 0 && (
                 <div>
                   <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
-                    Products
+                    {t("search.products_label")}
                   </p>
                   <div className="space-y-1">
                     {results.map((product) => (
@@ -116,18 +117,18 @@ export default function SearchOverlay({ open, onClose }: SearchOverlayProps) {
                           data-testid={`link-search-result-${product.id}`}
                           className="flex items-center gap-3 p-3 rounded-xl hover:bg-muted transition-colors cursor-pointer group"
                         >
-                          <div className="w-10 h-10 rounded-lg bg-muted overflow-hidden shrink-0">
+                          <div className="w-10 h-10 rounded-lg bg-[#FAFAFA] dark:bg-muted overflow-hidden shrink-0 flex items-center justify-center">
                             <img
                               src={product.imageUrl}
                               alt={product.name}
-                              className="w-full h-full object-cover"
+                              className="w-8 h-8 object-contain"
                             />
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-semibold text-foreground truncate">{product.name}</p>
                             <p className="text-xs text-muted-foreground">{product.category}</p>
                           </div>
-                          <ArrowRight size={14} className="text-muted-foreground group-hover:text-foreground transition-colors shrink-0" />
+                          <ArrowRight size={14} className="text-muted-foreground group-hover:text-foreground transition-colors shrink-0 rtl:rotate-180" />
                         </span>
                       </Link>
                     ))}
@@ -137,7 +138,7 @@ export default function SearchOverlay({ open, onClose }: SearchOverlayProps) {
 
               {query.length >= 2 && results.length === 0 && (
                 <div className="text-center py-8">
-                  <p className="text-muted-foreground text-sm">No products found for "{query}"</p>
+                  <p className="text-muted-foreground text-sm">{t("products.no_results")} "{query}"</p>
                 </div>
               )}
             </div>

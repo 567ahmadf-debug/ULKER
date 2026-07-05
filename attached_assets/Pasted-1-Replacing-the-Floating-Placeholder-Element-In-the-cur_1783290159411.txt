@@ -1,0 +1,62 @@
+1. Replacing the Floating Placeholder Element
+"In the current user interface, there is a large, floating beige circle in the center containing the text 'ÜLKER'. This is currently acting as a temporary placeholder.
+
+I want to replace this floating element with a high-quality, realistic visual of an actual product from the company (such as a polished front-facing product shot or a clean illustration of a popular snack like the 'O'lala' cake or a signature Ülker biscuit). The replacement should look modern, clean, and blend seamlessly into the catalog's design.
+
+Could you provide the updated frontend code (HTML/CSS/React) to achieve this replacement?"
+
+2. Optimizing and Consolidating Search Layout
+"The current layout has redundant search triggers: one search icon in the top header, and another 'Search' tab in the bottom navigation bar, which creates unnecessary clutter.
+
+I want to completely remove the search icon from the top header and completely remove the 'Search' tab from the bottom navigation bar. Instead, integrate a clean, persistent search input bar directly inside the 'All Products' page view—positioned just below the 'All Products / 22 products found' text and right above the 'Filters' and 'Popular' sorting buttons.
+
+Please provide the updated React/frontend code and structural modifications to clean up the navigation/header components and embed the search bar directly into the products container."
+
+3. Removing Redundant Product Categories View
+"I want to completely delete and remove the 'Product Categories' view from the application since it is redundant, unnecessary, and already handled by the product filtering system.
+
+To achieve this, please perform the following structural updates to the code:
+
+Completely remove the 'Categories' tab from the bottom navigation bar menu.
+
+Delete or disable the routing/navigation logic linked to this categories view.
+
+Adjust the bottom navigation layout styles so the remaining items ('Home', 'Products', 'More') are spaced evenly and neatly.
+
+Please provide the updated layout and routing code reflecting these cleanups."
+
+4. Implementing Multi-Language Support (EN/AR) & RTL
+"I want to add full multi-language support (English and Arabic) to the website application. Please provide the implementation using react-i18next.
+
+Requirements:
+
+Language Switcher UI: Add a clean language toggle button in the top header (next to the dark/light mode moon icon). Clicking it should toggle between 'EN' and 'AR'.
+
+RTL Support: When Arabic is selected, the entire application layout direction must automatically shift to Right-to-Left (dir="rtl"), and the font should change to a clean, modern Arabic font (like Tajawal or Cairo). When English is selected, it should revert to Left-to-Right (dir="ltr").
+
+Translation Keys Structure: Provide the boilerplate structure for the translation files (en.json and ar.json) covering the main layout strings, such as:
+
+"All Products" -> "جميع المنتجات"
+
+"In Stock" -> "متوفر في المخزن"
+
+"View Details" -> "عرض التفاصيل"
+
+"Products" -> "المنتجات"
+
+"Home" -> "الرئيسية"
+
+Please generate the code for the configuration setup, the layout wrapper that handles the dir attribute dynamically, and the updated language switcher component."
+
+5. Updating Product Cards with Real Flat Packaging Images
+"I want to update the product cards in the catalog to display real, high-quality product images instead of the current text-based solid color placeholders.
+
+Specific Requirements:
+
+Real Product Images: Replace the background blocks for items like 'Petibör' and 'Albeni' with actual, realistic front-facing mockups or official package photography of the Ülker products.
+
+Flat Front View Only: Disable and completely remove any multi-angle view features, 3D rotations, or side-perspective options. The images must strictly show only the clean, static front face (flat package shot) of each product.
+
+Consistent Image Styling: Apply unified CSS styling (object-fit: contain or cover) to ensure all real package images fit perfectly within the cards, maintaining a neat, modern Grid layout on white or soft neutral backgrounds.
+
+Please provide the updated React components and data structures (such as updating the image URLs or asset paths in the products array) to implement this change."

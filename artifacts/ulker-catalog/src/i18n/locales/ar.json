@@ -1,0 +1,95 @@
+{
+  "catalog": "كتالوج المنتجات",
+  "nav": {
+    "home": "الرئيسية",
+    "products": "المنتجات",
+    "quality": "الجودة",
+    "sustainability": "الاستدامة",
+    "about": "عن الشركة",
+    "contact": "اتصل بنا"
+  },
+  "mobile": {
+    "home": "الرئيسية",
+    "products": "المنتجات",
+    "more": "المزيد"
+  },
+  "hero": {
+    "badge": "كتالوج المنتجات الرسمي",
+    "headline_1": "استكشف جميع",
+    "headline_2": "منتجات ülker",
+    "headline_3": "",
+    "description": "اكتشف معلومات المنتج الكاملة والمكونات والقيم الغذائية وتفاصيل التغليف والتوفر الفوري عبر نطاقنا الكامل.",
+    "browse_products": "تصفح المنتجات",
+    "view_categories": "عرض الفئات",
+    "stat_products": "منتج",
+    "stat_categories": "فئة",
+    "stat_countries": "دولة",
+    "scroll": "مرر للأسفل",
+    "badge_200": "+200 منتج",
+    "badge_in_catalog": "في الكتالوج",
+    "badge_in_stock": "متوفر",
+    "badge_updated_live": "تحديث فوري"
+  },
+  "products": {
+    "all_products": "جميع المنتجات",
+    "products_found_one": "{{count}} منتج",
+    "products_found_other": "{{count}} منتج",
+    "search_placeholder": "ابحث عن المنتجات أو الفئات...",
+    "view_details": "عرض التفاصيل",
+    "no_results": "لم يتم العثور على منتجات",
+    "no_results_sub": "حاول تعديل المرشحات أو استعلام البحث.",
+    "sort_label": "ترتيب",
+    "popular": "الأكثر شعبية",
+    "newest": "الأحدث",
+    "az": "أ–ي",
+    "za": "ي–أ",
+    "new_badge": "جديد",
+    "popular_badge": "الأكثر شعبية"
+  },
+  "stock": {
+    "in_stock": "متوفر في المخزن",
+    "limited": "مخزون محدود",
+    "out_of_stock": "غير متوفر",
+    "available": "متاح",
+    "few_available": "عدد محدود من الكراتين",
+    "unavailable": "غير متوفر حالياً",
+    "updated_now": "تم التحديث للتو",
+    "updated_2h": "تم التحديث منذ ساعتين",
+    "updated_today": "تم التحديث اليوم",
+    "availability": "التوفر"
+  },
+  "filters": {
+    "title": "المرشحات",
+    "search": "بحث",
+    "categories": "الفئات",
+    "availability": "التوفر",
+    "weight": "الوزن",
+    "clear_all": "مسح جميع المرشحات",
+    "all": "الكل"
+  },
+  "search": {
+    "popular_searches": "عمليات البحث الشائعة",
+    "products_label": "المنتجات",
+    "placeholder": "ابحث عن المنتجات أو الفئات..."
+  },
+  "detail": {
+    "back": "المنتجات",
+    "category": "الفئة",
+    "related": "منتجات مشابهة",
+    "availability": "التوفر",
+    "packaging": "معلومات التغليف",
+    "nutrition": "القيم الغذائية",
+    "ingredients": "المكونات",
+    "allergens": "معلومات المواد المسببة للحساسية",
+    "description": "وصف المنتج",
+    "per_serving": "لكل وجبة",
+    "contains": "يحتوي على",
+    "may_contain": "قد يحتوي على",
+    "no_allergens": "لا توجد مواد مسببة للحساسية.",
+    "related_products": "منتجات ذات صلة",
+    "taste": "الطعم",
+    "texture": "القوام",
+    "storage": "التخزين",
+    "serving": "اقتراحات التقديم"
+  }
+}

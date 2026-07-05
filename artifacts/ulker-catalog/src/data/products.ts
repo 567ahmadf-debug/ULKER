@@ -86,7 +86,7 @@ export const products: Product[] = [
     texture: "Crisp and uniform with a delicate snap — neither too thick nor too thin.",
     storageInstructions: "Store in a cool, dry place away from direct sunlight. Reseal package after opening.",
     servingSuggestions: "Perfect alongside Turkish tea or coffee. Also enjoyed with cheese or as a light snack any time of day.",
-    imageUrl: "https://placehold.co/600x600/F5E6D3/6B1A2A?text=Petib%C3%B6r&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/6B1A2A?text=Petib%C3%B6r&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/F5E6D3/6B1A2A?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/E8D5BE/6B1A2A?text=Back&font=inter" },
@@ -137,7 +137,7 @@ export const products: Product[] = [
     texture: "Crisp biscuit layer contrasts beautifully with soft caramel and a smooth chocolate shell.",
     storageInstructions: "Store below 20°C in a dry place. Do not refrigerate — chocolate may bloom.",
     servingSuggestions: "Ideal as an afternoon treat. Pairs excellently with espresso or a glass of cold milk.",
-    imageUrl: "https://placehold.co/600x600/3D1A00/C9A84C?text=Albeni&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/C9A84C?text=Albeni&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/3D1A00/C9A84C?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/2D1200/C9A84C?text=Back&font=inter" },
@@ -188,7 +188,7 @@ export const products: Product[] = [
     texture: "Firm biscuit shell gives way to pillowy marshmallow, all encased in smooth chocolate.",
     storageInstructions: "Store in a cool, dry place. Best consumed within 3 days of opening.",
     servingSuggestions: "A classic after-school snack. Exceptional when slightly chilled on warm days.",
-    imageUrl: "https://placehold.co/600x600/1A0A00/D4AF37?text=Halley&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/D4AF37?text=Halley&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/1A0A00/D4AF37?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/110600/D4AF37?text=Back&font=inter" },
@@ -239,7 +239,7 @@ export const products: Product[] = [
     texture: "Feather-light wafer layers contrasted with dense, smooth hazelnut cream and a snappy chocolate exterior.",
     storageInstructions: "Store below 20°C away from light and humidity.",
     servingSuggestions: "A refined treat with afternoon tea. Also ideal as a dessert accompaniment.",
-    imageUrl: "https://placehold.co/600x600/5C3317/E8D5BE?text=Dido&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/E8D5BE?text=Dido&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/5C3317/E8D5BE?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/4A2810/E8D5BE?text=Back&font=inter" },
@@ -290,7 +290,7 @@ export const products: Product[] = [
     texture: "Light and slightly crumbly, with a delicate snap and airy feel.",
     storageInstructions: "Store in a cool, dry place. Keep tightly sealed after opening.",
     servingSuggestions: "Best served alongside Turkish çay. Also wonderful crumbled over yogurt or desserts.",
-    imageUrl: "https://placehold.co/600x600/FDF8F0/6B1A2A?text=Han%C4%B1meller&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/6B1A2A?text=Han%C4%B1meller&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/FDF8F0/6B1A2A?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/F5EFE6/6B1A2A?text=Back&font=inter" },
@@ -341,7 +341,7 @@ export const products: Product[] = [
     texture: "Firm, crisp biscuit shells with a smooth, yielding cream filling.",
     storageInstructions: "Store in a cool, dry place. Do not expose to direct heat.",
     servingSuggestions: "Excellent dunked in cold milk. A great lunchbox treat for all ages.",
-    imageUrl: "https://placehold.co/600x600/2D1B00/C9A84C?text=%C3%87okoprens&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/C9A84C?text=%C3%87okoprens&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/2D1B00/C9A84C?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/1E1000/C9A84C?text=Back&font=inter" },
@@ -392,7 +392,7 @@ export const products: Product[] = [
     texture: "Smooth melt-in-the-mouth with a crisp initial snap.",
     storageInstructions: "Store below 18°C in a cool, dry place away from strong odours.",
     servingSuggestions: "Savour slowly as a premium standalone treat. Pairs beautifully with red wine or espresso.",
-    imageUrl: "https://placehold.co/600x600/1A0A00/D4AF37?text=Dark+70%25&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/D4AF37?text=Dark+70%25&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/1A0A00/D4AF37?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/110600/D4AF37?text=Back&font=inter" },
@@ -443,7 +443,7 @@ export const products: Product[] = [
     texture: "Uniquely light and airy — the thin wafer layers dissolve almost instantly.",
     storageInstructions: "Store below 20°C. Avoid humidity to maintain texture.",
     servingSuggestions: "Perfect mid-morning treat. Also a lovely accompaniment to vanilla ice cream.",
-    imageUrl: "https://placehold.co/600x600/7A5230/F5E6D3?text=Alpella&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/F5E6D3?text=Alpella&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/7A5230/F5E6D3?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/6B4525/F5E6D3?text=Back&font=inter" },
@@ -494,7 +494,7 @@ export const products: Product[] = [
     texture: "Yielding, chewy caramel centre encased in a smooth chocolate shell.",
     storageInstructions: "Store between 12-18°C. Do not refrigerate.",
     servingSuggestions: "A sophisticated after-dinner treat. Excellent as a gift or premium entertaining option.",
-    imageUrl: "https://placehold.co/600x600/C9A84C/1A0A00?text=Caramel+Twist&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/1A0A00?text=Caramel+Twist&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/C9A84C/1A0A00?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/B89540/1A0A00?text=Back&font=inter" },
@@ -545,7 +545,7 @@ export const products: Product[] = [
     texture: "Crisp and light wafer layers with a smooth, dense hazelnut filling.",
     storageInstructions: "Store in a cool, dry place. Protect from humidity to maintain crispness.",
     servingSuggestions: "Great as a snack at any time of day. A perfect companion for hot beverages.",
-    imageUrl: "https://placehold.co/600x600/8B5E3C/F5E6D3?text=Biskrem&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/F5E6D3?text=Biskrem&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/8B5E3C/F5E6D3?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/7A5030/F5E6D3?text=Back&font=inter" },
@@ -596,7 +596,7 @@ export const products: Product[] = [
     texture: "Airy, crispy wafer with a yielding, cloud-like cream layer.",
     storageInstructions: "Store in a cool, dry place. Best consumed promptly after opening.",
     servingSuggestions: "An all-day snack. Perfect for children and adults alike.",
-    imageUrl: "https://placehold.co/600x600/FFF8F0/8B5E3C?text=Kremal%C4%B1+Gofret&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/8B5E3C?text=Kremal%C4%B1+Gofret&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/FFF8F0/8B5E3C?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/F5EFE6/8B5E3C?text=Back&font=inter" },
@@ -647,7 +647,7 @@ export const products: Product[] = [
     texture: "Crisp wafer layers and a thick, fudgy chocolate cream centre.",
     storageInstructions: "Store in a cool, dry place below 20°C.",
     servingSuggestions: "Excellent with cold milk or as a mid-morning snack.",
-    imageUrl: "https://placehold.co/600x600/3D2000/D4AF37?text=%C3%87okokrem+Wafer&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/D4AF37?text=%C3%87okokrem+Wafer&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/3D2000/D4AF37?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/2E1800/D4AF37?text=Back&font=inter" },
@@ -698,7 +698,7 @@ export const products: Product[] = [
     texture: "Crisp exterior with a slightly tender interior — classic shortbread character.",
     storageInstructions: "Store in a cool, dry place. Tin helps maintain freshness after opening.",
     servingSuggestions: "Perfect as a premium tea-time biscuit or as a thoughtful gift.",
-    imageUrl: "https://placehold.co/600x600/C9A84C/3D2000?text=Alt%C4%B1n+Bisk%C3%BCvi&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/3D2000?text=Alt%C4%B1n+Bisk%C3%BCvi&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/C9A84C/3D2000?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/B89540/3D2000?text=Back&font=inter" },
@@ -749,7 +749,7 @@ export const products: Product[] = [
     texture: "Dense and satisfying with a slightly chewy, hearty bite.",
     storageInstructions: "Store in a cool, dry place. Best within 2 days of opening.",
     servingSuggestions: "Ideal for breakfast or as a pre-workout snack. Excellent crumbled over porridge.",
-    imageUrl: "https://placehold.co/600x600/D4A853/3D2000?text=Yulafl%C4%B1&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/3D2000?text=Yulafl%C4%B1&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/D4A853/3D2000?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/C49545/3D2000?text=Back&font=inter" },
@@ -800,7 +800,7 @@ export const products: Product[] = [
     texture: "Soft, moist crumb with a delicate golden crust.",
     storageInstructions: "Store in a cool, dry place. Best consumed on day of opening.",
     servingSuggestions: "Perfect with morning tea or as an afternoon pick-me-up.",
-    imageUrl: "https://placehold.co/600x600/F5C842/3D2000?text=%C3%9Clker+Kek&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/3D2000?text=%C3%9Clker+Kek&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/F5C842/3D2000?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/E8B835/3D2000?text=Back&font=inter" },
@@ -851,7 +851,7 @@ export const products: Product[] = [
     texture: "Fluffy sponge with a dense, fudgy cream — satisfying in every slice.",
     storageInstructions: "Refrigerate after opening. Best consumed within 2 days.",
     servingSuggestions: "Serve in slices as a dessert. Excellent with a scoop of ice cream.",
-    imageUrl: "https://placehold.co/600x600/6B1A2A/F5E6D3?text=Rulo+Pasta&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/F5E6D3?text=Rulo+Pasta&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/6B1A2A/F5E6D3?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/5A1422/F5E6D3?text=Back&font=inter" },
@@ -902,7 +902,7 @@ export const products: Product[] = [
     texture: "Ultra-thin with a delicate, airy crunch.",
     storageInstructions: "Store in a cool, dry place. Reseal pouch after opening.",
     servingSuggestions: "Excellent with hummus, soft cheese, or enjoyed as a standalone savoury snack.",
-    imageUrl: "https://placehold.co/600x600/D4A853/1A0A00?text=%C3%87edar+Kraker&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/1A0A00?text=%C3%87edar+Kraker&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/D4A853/1A0A00?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/C49545/1A0A00?text=Back&font=inter" },
@@ -953,7 +953,7 @@ export const products: Product[] = [
     texture: "Crisp ring shape with a satisfying crunch and generous sesame coating.",
     storageInstructions: "Store in a cool, dry place. Keep sealed to retain crunch.",
     servingSuggestions: "Traditional with white cheese and olives for a Turkish-style breakfast spread.",
-    imageUrl: "https://placehold.co/600x600/C9A84C/6B1A2A?text=Simit+Kraker&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/6B1A2A?text=Simit+Kraker&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/C9A84C/6B1A2A?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/B89540/6B1A2A?text=Back&font=inter" },
@@ -1004,7 +1004,7 @@ export const products: Product[] = [
     texture: "Soft, chewy, and springy gummy with excellent hold and rebound.",
     storageInstructions: "Store in a cool, dry place. Avoid humidity to prevent stickiness.",
     servingSuggestions: "A fun treat for parties, lunchboxes, or movie nights.",
-    imageUrl: "https://placehold.co/600x600/E83A5A/FFF8F0?text=Yupi&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/FFF8F0?text=Yupi&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/E83A5A/FFF8F0?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/D42A4A/FFF8F0?text=Back&font=inter" },
@@ -1055,7 +1055,7 @@ export const products: Product[] = [
     texture: "Firm yet chewy with a satisfying resistance and clean finish.",
     storageInstructions: "Store in a cool, dry place. Do not expose to direct sunlight.",
     servingSuggestions: "A pocketable treat for on-the-go enjoyment.",
-    imageUrl: "https://placehold.co/600x600/F7A832/1A0A00?text=Cici&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/1A0A00?text=Cici&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/F7A832/1A0A00?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/E89525/1A0A00?text=Back&font=inter" },
@@ -1106,7 +1106,7 @@ export const products: Product[] = [
     texture: "Thin, airy, and exceptionally crisp with a delicate shatter.",
     storageInstructions: "Store in a cool, dry place. Reseal pouch to maintain crunch.",
     servingSuggestions: "Excellent with dips, spreads, or enjoyed plain with drinks.",
-    imageUrl: "https://placehold.co/600x600/E8D5A8/3D2000?text=Dore+Kraker&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/3D2000?text=Dore+Kraker&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/E8D5A8/3D2000?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/D5C295/3D2000?text=Back&font=inter" },
@@ -1157,7 +1157,7 @@ export const products: Product[] = [
     texture: "Flaky and light — evocative of real börek pastry in snack form.",
     storageInstructions: "Store in a cool, dry place. Keep sealed to preserve flavour.",
     servingSuggestions: "Excellent with tea or as a sophisticated cheese board accompaniment.",
-    imageUrl: "https://placehold.co/600x600/6B8C3A/FDF8F0?text=B%C3%B6rek%C3%A7i&font=inter",
+    imageUrl: "https://placehold.co/600x600/FAFAFA/FDF8F0?text=B%C3%B6rek%C3%A7i&font=inter",
     thumbnails: [
       { label: "Front", url: "https://placehold.co/120x120/6B8C3A/FDF8F0?text=Front&font=inter" },
       { label: "Back", url: "https://placehold.co/120x120/5A7A2E/FDF8F0?text=Back&font=inter" },

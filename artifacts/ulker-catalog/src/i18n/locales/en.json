@@ -1,0 +1,95 @@
+{
+  "catalog": "Product Catalog",
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "quality": "Quality",
+    "sustainability": "Sustainability",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "mobile": {
+    "home": "Home",
+    "products": "Products",
+    "more": "More"
+  },
+  "hero": {
+    "badge": "Official Product Catalog",
+    "headline_1": "Explore Every",
+    "headline_2": "Ülker",
+    "headline_3": "Product",
+    "description": "Discover complete product information, ingredients, nutritional values, packaging details, and real-time availability across our full range.",
+    "browse_products": "Browse Products",
+    "view_categories": "View Categories",
+    "stat_products": "Products",
+    "stat_categories": "Categories",
+    "stat_countries": "Countries",
+    "scroll": "Scroll",
+    "badge_200": "200+ Products",
+    "badge_in_catalog": "In catalog",
+    "badge_in_stock": "In Stock",
+    "badge_updated_live": "Updated live"
+  },
+  "products": {
+    "all_products": "All Products",
+    "products_found_one": "{{count}} product found",
+    "products_found_other": "{{count}} products found",
+    "search_placeholder": "Search products, categories...",
+    "view_details": "View Details",
+    "no_results": "No products found",
+    "no_results_sub": "Try adjusting your filters or search query.",
+    "sort_label": "Sort",
+    "popular": "Popular",
+    "newest": "Newest",
+    "az": "A–Z",
+    "za": "Z–A",
+    "new_badge": "New",
+    "popular_badge": "Popular"
+  },
+  "stock": {
+    "in_stock": "In Stock",
+    "limited": "Limited Stock",
+    "out_of_stock": "Out of Stock",
+    "available": "Available",
+    "few_available": "Only few cartons available",
+    "unavailable": "Currently unavailable",
+    "updated_now": "Updated just now",
+    "updated_2h": "Updated 2 hours ago",
+    "updated_today": "Updated today",
+    "availability": "Availability"
+  },
+  "filters": {
+    "title": "Filters",
+    "search": "Search",
+    "categories": "Categories",
+    "availability": "Availability",
+    "weight": "Weight",
+    "clear_all": "Clear all filters",
+    "all": "All"
+  },
+  "search": {
+    "popular_searches": "Popular searches",
+    "products_label": "Products",
+    "placeholder": "Search products, categories..."
+  },
+  "detail": {
+    "back": "Products",
+    "category": "Category",
+    "related": "Related",
+    "availability": "Availability",
+    "packaging": "Packaging Information",
+    "nutrition": "Nutrition Facts",
+    "ingredients": "Ingredients",
+    "allergens": "Allergen Information",
+    "description": "Product Description",
+    "per_serving": "Per serving",
+    "contains": "Contains",
+    "may_contain": "May Contain",
+    "no_allergens": "No known allergens.",
+    "related_products": "Related Products",
+    "taste": "Taste",
+    "texture": "Texture",
+    "storage": "Storage",
+    "serving": "Serving Suggestions"
+  }
+}
