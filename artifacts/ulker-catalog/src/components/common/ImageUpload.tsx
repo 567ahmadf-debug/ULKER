@@ -1,12 +1,11 @@
 import { useState, useRef, useCallback } from "react";
 import { Upload, X, Image as ImageIcon } from "lucide-react";
+import { uploadImageToCloud } from "@/data/cloud-store";
+import { CLOUD_CONFIG } from "@/data/cloud-config";
 
-// File validation constants
 const MAX_SIZE_MB = 5;
 const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif", "image/svg+xml"];
-
-// Max dimensions for resize (keeps format, just lowers resolution)
 const MAX_WIDTH = 400;
 const MAX_HEIGHT = 400;
 
@@ -16,46 +15,27 @@ interface ImageUploadProps {
   label?: string;
 }
 
-/**
- * Resizes image to max 400x400 while keeping original format (no compression to JPEG).
- */
 function resizeImage(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const img = new window.Image();
     const url = URL.createObjectURL(file);
-
     img.onload = () => {
       URL.revokeObjectURL(url);
-
       let { width, height } = img;
-
-      // Scale down only if exceeds max, keep aspect ratio
       if (width > MAX_WIDTH || height > MAX_HEIGHT) {
         const ratio = Math.min(MAX_WIDTH / width, MAX_HEIGHT / height);
         width = Math.round(width * ratio);
         height = Math.round(height * ratio);
       }
-
       const canvas = document.createElement("canvas");
       canvas.width = width;
       canvas.height = height;
       const ctx = canvas.getContext("2d");
-      if (!ctx) {
-        reject(new Error("Failed to create canvas context"));
-        return;
-      }
+      if (!ctx) { reject(new Error("Canvas error")); return; }
       ctx.drawImage(img, 0, 0, width, height);
-
-      // Keep original format: PNG stays PNG, WebP stays WebP, etc.
-      const mimeType = file.type || "image/png";
-      resolve(canvas.toDataURL(mimeType));
+      resolve(canvas.toDataURL(file.type || "image/png"));
     };
-
-    img.onerror = () => {
-      URL.revokeObjectURL(url);
-      reject(new Error("Failed to load image"));
-    };
-
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("Load error")); };
     img.src = url;
   });
 }
@@ -69,14 +49,10 @@ export default function ImageUpload({ value, onChange, label = "Image" }: ImageU
   const processFile = useCallback(
     async (file: File) => {
       setError(null);
-
-      // Validate file type
       if (!ALLOWED_TYPES.includes(file.type)) {
         setError(`Invalid type. Allowed: ${ALLOWED_TYPES.map((t) => t.split("/")[1]).join(", ")}`);
         return;
       }
-
-      // Validate file size
       if (file.size > MAX_SIZE_BYTES) {
         setError(`File too large. Maximum: ${MAX_SIZE_MB}MB`);
         return;
@@ -84,8 +60,8 @@ export default function ImageUpload({ value, onChange, label = "Image" }: ImageU
 
       setLoading(true);
       try {
+        // 1) Resize the image
         let dataUrl: string;
-
         if (file.type === "image/svg+xml") {
           dataUrl = await new Promise<string>((resolve, reject) => {
             const reader = new FileReader();
@@ -97,19 +73,37 @@ export default function ImageUpload({ value, onChange, label = "Image" }: ImageU
           dataUrl = await resizeImage(file);
         }
 
-        // Upload to server (Vite plugin saves to public/uploads/)
-        const base64 = dataUrl.includes(",") ? dataUrl.split(",")[1] : dataUrl;
-        const res = await fetch("/api/upload-image", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ filename: file.name, data: base64 }),
-        });
-        if (!res.ok) throw new Error(`Upload failed: ${res.status}`);
-        const { url } = await res.json();
-        onChange(url);
+        // 2) Try cloud upload (imgbb) if configured
+        if (CLOUD_CONFIG.IMGBB_API_KEY) {
+          try {
+            const url = await uploadImageToCloud(file);
+            onChange(url);
+            return;
+          } catch (cloudErr) {
+            console.warn("[ImageUpload] Cloud upload failed, trying local:", cloudErr);
+          }
+        }
+
+        // 3) Fallback: try local dev server
+        try {
+          const base64 = dataUrl.includes(",") ? dataUrl.split(",")[1] : dataUrl;
+          const res = await fetch("/api/upload-image", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ filename: file.name, data: base64 }),
+          });
+          if (res.ok) {
+            const { url } = await res.json();
+            onChange(url);
+            return;
+          }
+        } catch {}
+
+        // 4) Final fallback: store as base64 data URL
+        onChange(dataUrl);
       } catch (err) {
         console.error("[ImageUpload] Upload failed:", err);
-        setError("Failed to upload. Is the dev server running?");
+        setError("Failed to process image. Please try again.");
       } finally {
         setLoading(false);
       }
@@ -138,7 +132,6 @@ export default function ImageUpload({ value, onChange, label = "Image" }: ImageU
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       if (file) processFile(file);
-      // Reset input so same file can be re-selected
       e.target.value = "";
     },
     [processFile]
@@ -158,8 +151,6 @@ export default function ImageUpload({ value, onChange, label = "Image" }: ImageU
       <label className="text-xs font-semibold text-muted-foreground block mb-1.5">
         {label}
       </label>
-
-      {/* Drop zone */}
       <div
         onDrop={handleDrop}
         onDragOver={handleDragOver}
@@ -180,17 +171,14 @@ export default function ImageUpload({ value, onChange, label = "Image" }: ImageU
           onChange={handleFileSelect}
           className="hidden"
         />
-
         {loading ? (
-          /* Loading state during compression */
           <div className="py-2">
             <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center mx-auto mb-2 animate-pulse">
               <Upload size={18} className="text-primary" />
             </div>
-            <p className="text-sm font-medium text-foreground">Processing image...</p>
+            <p className="text-sm font-medium text-foreground">Uploading image...</p>
           </div>
         ) : value ? (
-          /* Preview when image is set */
           <div className="flex items-center gap-4">
             <img
               src={value}
@@ -211,7 +199,6 @@ export default function ImageUpload({ value, onChange, label = "Image" }: ImageU
             </button>
           </div>
         ) : (
-          /* Empty state */
           <div className="py-2">
             <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center mx-auto mb-2">
               {dragOver ? (
@@ -229,8 +216,6 @@ export default function ImageUpload({ value, onChange, label = "Image" }: ImageU
           </div>
         )}
       </div>
-
-      {/* Error message */}
       {error && (
         <p className="text-red-500 text-xs mt-1.5">{error}</p>
       )}

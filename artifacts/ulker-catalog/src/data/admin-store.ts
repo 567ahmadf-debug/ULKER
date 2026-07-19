@@ -1,4 +1,6 @@
 import { products as staticProducts, type Product } from "@/data/products";
+import { CLOUD_CONFIG } from "@/data/cloud-config";
+import { cloudGet, cloudSet } from "@/data/cloud-store";
 
 const STORAGE_KEY = "ulker-admin-products";
 const DELETED_KEY = "ulker-admin-deleted";
@@ -53,6 +55,10 @@ function saveOverrides(overrides: Product[]): boolean {
       deletedIds: loadDeletedIds(),
       settings: getSettings(),
     });
+    // Sync to cloud (Firebase) if configured
+    if (CLOUD_CONFIG.FIREBASE_DB_URL) {
+      cloudSet("admin/overrides", overrides);
+    }
     return true;
   } catch (err) {
     console.error("[AdminStore] Failed to save products to localStorage:", err);
@@ -72,6 +78,9 @@ function loadDeletedIds(): string[] {
 function saveDeletedIds(ids: string[]) {
   try {
     localStorage.setItem(DELETED_KEY, JSON.stringify(ids));
+    if (CLOUD_CONFIG.FIREBASE_DB_URL) {
+      cloudSet("admin/deletedIds", ids);
+    }
   } catch {}
 }
 
@@ -100,6 +109,9 @@ export function saveSettings(settings: SiteSettings): boolean {
       deletedIds: loadDeletedIds(),
       settings,
     });
+    if (CLOUD_CONFIG.FIREBASE_DB_URL) {
+      cloudSet("admin/settings", settings);
+    }
     return true;
   } catch (err) {
     console.error("[AdminStore] Failed to save settings to localStorage:", err);
@@ -115,18 +127,30 @@ async function initFromServer() {
   if (initialized) return;
   initialized = true;
 
+  // 1) Try local dev server first
   const serverData = await fetchAdminData();
-  if (!serverData) return;
+  if (serverData) {
+    if (serverData.overrides) localStorage.setItem(STORAGE_KEY, JSON.stringify(serverData.overrides));
+    if (serverData.deletedIds) localStorage.setItem(DELETED_KEY, JSON.stringify(serverData.deletedIds));
+    if (serverData.settings) localStorage.setItem(SETTINGS_KEY, JSON.stringify(serverData.settings));
+  }
 
-  // Server has data — sync into localStorage so all components read consistently
-  if (serverData.overrides) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(serverData.overrides));
-  }
-  if (serverData.deletedIds) {
-    localStorage.setItem(DELETED_KEY, JSON.stringify(serverData.deletedIds));
-  }
-  if (serverData.settings) {
-    localStorage.setItem(SETTINGS_KEY, JSON.stringify(serverData.settings));
+  // 2) Try Firebase cloud — overrides local data if cloud has newer
+  if (CLOUD_CONFIG.FIREBASE_DB_URL) {
+    const [cloudOverrides, cloudDeleted, cloudSettings] = await Promise.all([
+      cloudGet<Product[]>("admin/overrides"),
+      cloudGet<string[]>("admin/deletedIds"),
+      cloudGet<SiteSettings>("admin/settings"),
+    ]);
+    if (cloudOverrides && Array.isArray(cloudOverrides) && cloudOverrides.length > 0) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cloudOverrides));
+    }
+    if (cloudDeleted && Array.isArray(cloudDeleted)) {
+      localStorage.setItem(DELETED_KEY, JSON.stringify(cloudDeleted));
+    }
+    if (cloudSettings && typeof cloudSettings === "object") {
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(cloudSettings));
+    }
   }
 }
 
@@ -194,6 +218,12 @@ export function resetAllData() {
   localStorage.removeItem(SETTINGS_KEY);
   // Also clear server-side data
   pushAdminData({ overrides: [], deletedIds: [], settings: defaultSettings });
+  // Clear cloud data
+  if (CLOUD_CONFIG.FIREBASE_DB_URL) {
+    cloudSet("admin/overrides", []);
+    cloudSet("admin/deletedIds", []);
+    cloudSet("admin/settings", defaultSettings);
+  }
 }
 
 export function getRelatedProducts(product: Product): Product[] {
@@ -279,6 +309,18 @@ async function fetchOffersFromServer(): Promise<Offer[]> {
       }
     }
   } catch {}
+
+  // Try Firebase cloud for offers
+  if (CLOUD_CONFIG.FIREBASE_DB_URL) {
+    const cloudOffers = await cloudGet<Offer[]>("admin/offers");
+    if (cloudOffers && Array.isArray(cloudOffers) && cloudOffers.length > 0) {
+      const migrated = cloudOffers.map(migrateOffer);
+      offersCache = migrated;
+      localStorage.setItem(OFFERS_KEY, JSON.stringify(migrated));
+      return migrated;
+    }
+  }
+
   return loadOffersLocal();
 }
 
@@ -308,6 +350,10 @@ function persistOffers(offers: Offer[]) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(offers),
   }).catch(() => {});
+  // Sync to cloud (Firebase) if configured
+  if (CLOUD_CONFIG.FIREBASE_DB_URL) {
+    cloudSet("admin/offers", offers);
+  }
 }
 
 export function getAllOffers(): Offer[] {
@@ -360,11 +406,20 @@ export async function fetchServerFavorites(): Promise<Record<string, number>> {
     const res = await fetch("/api/favorites");
     if (res.ok) {
       const data = await res.json();
-      // Sync to localStorage cache
       localStorage.setItem(FAVORITES_KEY, JSON.stringify(data));
       return data;
     }
   } catch {}
+
+  // Try Firebase cloud for favorites
+  if (CLOUD_CONFIG.FIREBASE_DB_URL) {
+    const cloudFavs = await cloudGet<Record<string, number>>("favorites");
+    if (cloudFavs && typeof cloudFavs === "object") {
+      localStorage.setItem(FAVORITES_KEY, JSON.stringify(cloudFavs));
+      return cloudFavs;
+    }
+  }
+
   return getFavorites();
 }
 
@@ -403,6 +458,11 @@ export function toggleFavorite(productId: string): string[] {
     try {
       localStorage.setItem(FAVORITES_KEY, JSON.stringify(stats));
     } catch {}
+
+    // Sync favorites to Firebase cloud
+    if (CLOUD_CONFIG.FIREBASE_DB_URL) {
+      cloudSet("favorites", stats);
+    }
   }
   return next;
 }
