@@ -9,8 +9,7 @@ import i18n from "@/i18n";
 const NAV_KEYS = [
   { href: "/", key: "nav.home" },
   { href: "/products", key: "nav.products" },
-  { href: "/quality", key: "nav.quality" },
-  { href: "/sustainability", key: "nav.sustainability" },
+  { href: "/offers", key: "nav.offers" },
   { href: "/about", key: "nav.about" },
   { href: "/contact", key: "nav.contact" },
 ];

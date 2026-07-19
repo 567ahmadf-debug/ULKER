@@ -6,12 +6,15 @@
     "quality": "Quality",
     "sustainability": "Sustainability",
     "about": "About",
-    "contact": "Contact"
+    "contact": "Contact",
+    "offers": "Offers"
   },
   "mobile": {
     "home": "Home",
     "products": "Products",
-    "more": "More"
+    "contact": "Contact",
+    "more": "More",
+    "offers": "Offers"
   },
   "hero": {
     "badge": "Official Product Catalog",
@@ -91,5 +94,13 @@
     "texture": "Texture",
     "storage": "Storage",
     "serving": "Serving Suggestions"
+  },
+  "offers": {
+    "badge": "Offers & Discounts",
+    "title": "Special Offers",
+    "subtitle": "Discover our latest deals and seasonal discounts on Ülker products.",
+    "loading": "Loading offers...",
+    "empty": "No Offers Available",
+    "empty_sub": "Check back soon for exciting deals and discounts."
   }
 }

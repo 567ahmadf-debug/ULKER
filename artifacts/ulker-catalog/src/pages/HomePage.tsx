@@ -4,6 +4,7 @@ import FeaturedProducts from "@/components/home/FeaturedProducts";
 import Footer from "@/components/layout/Footer";
 import { motion } from "framer-motion";
 import { ShieldCheck, Leaf, Award, Globe } from "lucide-react";
+import { Link } from "wouter";
 
 const pillars = [
   {
@@ -93,9 +94,11 @@ export default function HomePage() {
           <p className="text-primary-foreground/80 mb-8 text-lg">
             Detailed specifications, nutritional information, and availability for every product.
           </p>
-          <a href="/products" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white text-primary font-bold text-sm hover:bg-primary-foreground/90 transition-colors">
-            Browse All Products
-          </a>
+          <Link href="/products" data-testid="link-browse-all-products">
+            <span className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white text-primary font-bold text-sm hover:bg-primary-foreground/90 transition-colors cursor-pointer">
+              Browse All Products
+            </span>
+          </Link>
         </div>
       </section>
 

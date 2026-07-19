@@ -1,0 +1,64 @@
+[
+  {
+    "id": "offer-1784464533591",
+    "type": "bundle",
+    "title": "Special offer",
+    "description": "This offer is for VIP customers",
+    "images": [
+      "/uploads/1784464252554-3ac3a081.png",
+      "/uploads/1784464256642-15e0d56c.png",
+      "/uploads/1784464262225-3e64e675.png"
+    ],
+    "coverIndex": 0,
+    "bundleItems": [
+      {
+        "productName": "Albeni Bar",
+        "quantity": 5
+      },
+      {
+        "productName": "Halley",
+        "quantity": 5
+      },
+      {
+        "productName": "gofret",
+        "quantity": 5
+      }
+    ],
+    "originalPrice": "35",
+    "offerPrice": "25",
+    "discountPercent": "",
+    "discountAmount": "",
+    "offerType": "Albeni  + Halley  +  Gofert ",
+    "badgeColor": "#E31837",
+    "isFeatured": true,
+    "savingPercent": "29",
+    "startsAt": "2026-07-20",
+    "endsAt": "2026-07-26"
+  },
+  {
+    "id": "offer-1784464964422",
+    "type": "discount",
+    "title": "Limited offer",
+    "description": "",
+    "images": [
+      "/uploads/1784464747629-74ee3d86.png"
+    ],
+    "coverIndex": 0,
+    "bundleItems": [
+      {
+        "productName": "",
+        "quantity": 1
+      }
+    ],
+    "originalPrice": "35",
+    "offerPrice": "26.25",
+    "discountPercent": "25",
+    "discountAmount": "",
+    "savingPercent": "25",
+    "offerType": "Ulker Dark Chocolate",
+    "badgeColor": "#184ae2",
+    "isFeatured": false,
+    "startsAt": "2026-07-19",
+    "endsAt": "2026-07-26"
+  }
+]

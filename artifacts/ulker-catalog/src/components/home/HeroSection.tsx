@@ -2,49 +2,106 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { getSettings } from "@/data/admin-store";
 
-function ProductShowcase() {
-  return (
-    <div className="relative w-full aspect-square max-w-sm mx-auto">
-      {/* Outer glow ring */}
-      <div className="absolute inset-4 rounded-full bg-gradient-to-br from-primary/10 via-accent/15 to-primary/5 blur-2xl" />
+const ADMIN_POSITIONS = [
+  { x: "5%", y: "5%", size: "w-28 h-28 lg:w-40 lg:h-40", rotate: -10 },
+  { x: "50%", y: "0%", size: "w-24 h-24 lg:w-32 lg:h-32", rotate: 15 },
+  { x: "25%", y: "35%", size: "w-32 h-32 lg:w-48 lg:h-48", rotate: -5 },
+  { x: "60%", y: "30%", size: "w-20 h-20 lg:w-28 lg:h-28", rotate: 22 },
+  { x: "0%", y: "60%", size: "w-20 h-20 lg:w-28 lg:h-28", rotate: -18 },
+  { x: "45%", y: "60%", size: "w-24 h-24 lg:w-36 lg:h-36", rotate: 8 },
+  { x: "15%", y: "75%", size: "w-16 h-16 lg:w-24 lg:h-24", rotate: -25 },
+  { x: "70%", y: "65%", size: "w-18 h-18 lg:w-24 lg:h-24", rotate: 12 },
+];
 
-      {/* Main product card */}
-      <div className="absolute inset-8 rounded-3xl bg-gradient-to-br from-primary to-primary/80 shadow-2xl flex flex-col items-center justify-center overflow-hidden">
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-4 left-4 w-24 h-24 rounded-full border-4 border-white" />
-          <div className="absolute bottom-4 right-4 w-16 h-16 rounded-full border-4 border-white" />
-          <div className="absolute top-1/2 -translate-y-1/2 left-2 w-12 h-12 rounded-full border-2 border-white" />
-        </div>
+const DEFAULT_BISCUITS = [
+  { x: "10%", y: "8%", size: "w-28 h-28 lg:w-36 lg:h-36", rotate: -12, delay: 0 },
+  { x: "55%", y: "5%", size: "w-20 h-20 lg:w-28 lg:h-28", rotate: 18, delay: 0.4 },
+  { x: "30%", y: "40%", size: "w-32 h-32 lg:w-44 lg:h-44", rotate: -5, delay: 0.2 },
+  { x: "65%", y: "35%", size: "w-24 h-24 lg:w-32 lg:h-32", rotate: 25, delay: 0.6 },
+  { x: "5%", y: "60%", size: "w-16 h-16 lg:w-24 lg:h-24", rotate: -20, delay: 0.8 },
+  { x: "50%", y: "65%", size: "w-20 h-20 lg:w-28 lg:h-28", rotate: 10, delay: 1.0 },
+];
 
-        {/* Gold band */}
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-accent/60 via-accent to-accent/60" />
-        <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-accent/60 via-accent to-accent/60" />
+function FloatingBiscuits() {
+  const settings = getSettings();
+  const hasAdminImages = settings.floatingImageUrls.length > 0;
 
-        {/* Product visual */}
-        <div className="relative z-10 flex flex-col items-center gap-3 px-6 text-center">
-          <div className="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center">
-            <span className="text-2xl font-black text-white tracking-tight">Ü</span>
-          </div>
-          <div>
-            <p className="text-white/60 text-[10px] font-bold tracking-widest uppercase mb-1">Since 1944</p>
-            <h3 className="text-white font-black text-xl tracking-tight leading-none">ÜLKER</h3>
-            <p className="text-white/70 text-[11px] font-medium mt-1.5 tracking-wide">PETIBÖR</p>
-          </div>
-          <div className="px-3 py-1 rounded-full bg-accent/90 text-[10px] font-bold text-white tracking-wide">
-            Classic Biscuit · 172g
-          </div>
-        </div>
-
-        {/* Biscuit circles decoration */}
-        <div className="absolute bottom-12 left-6 w-8 h-8 rounded-full bg-white/10 border border-white/20" />
-        <div className="absolute bottom-8 left-10 w-5 h-5 rounded-full bg-white/10 border border-white/20" />
-        <div className="absolute top-10 right-5 w-6 h-6 rounded-full bg-white/10 border border-white/20" />
+  if (hasAdminImages) {
+    return (
+      <div className="relative w-full h-[350px] lg:h-[520px]">
+        {settings.floatingImageUrls.map((url, i) => {
+          const pos = ADMIN_POSITIONS[i % ADMIN_POSITIONS.length];
+          return (
+            <motion.div
+              key={`admin-${i}`}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1, y: [-8, 8, -8] }}
+              transition={{
+                opacity: { duration: 0.5, delay: i * 0.1 },
+                scale: { duration: 0.5, delay: i * 0.1 },
+                y: { duration: 3.5 + (i % 3) * 0.7, repeat: Infinity, ease: "easeInOut", delay: i * 0.3 },
+              }}
+              className="absolute"
+              style={{ left: pos.x, top: pos.y, transform: `rotate(${pos.rotate}deg)` }}
+            >
+              <img
+                src={url}
+                alt={`Biscuit ${i + 1}`}
+                className={`${pos.size} object-contain drop-shadow-lg`}
+                style={{ background: "transparent" }}
+              />
+            </motion.div>
+          );
+        })}
       </div>
+    );
+  }
 
-      {/* Podium shadow */}
-      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-3/5 h-6 rounded-full bg-primary/20 blur-xl" />
+  return (
+    <div className="relative w-full h-[350px] lg:h-[520px]">
+      {DEFAULT_BISCUITS.map((b, i) => (
+        <motion.div
+          key={`default-${i}`}
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: 1, scale: 1, y: [-6, 6, -6] }}
+          transition={{
+            opacity: { duration: 0.6, delay: b.delay },
+            scale: { duration: 0.6, delay: b.delay },
+            y: { duration: 3 + (i % 3) * 0.5, repeat: Infinity, ease: "easeInOut", delay: b.delay },
+          }}
+          className="absolute"
+          style={{ left: b.x, top: b.y }}
+        >
+          <div
+            className={`${b.size} rounded-full bg-gradient-to-br from-primary/15 via-primary/8 to-accent/10 border border-primary/10 backdrop-blur-sm shadow-lg`}
+            style={{ transform: `rotate(${b.rotate}deg)` }}
+          >
+            <div className="w-full h-full rounded-full flex items-center justify-center">
+              <div className="w-[55%] h-[55%] rounded-full bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/8" />
+            </div>
+          </div>
+        </motion.div>
+      ))}
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+      >
+        <motion.div
+          animate={{ rotate: [0, 5, -5, 0] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="w-36 h-36 lg:w-52 lg:h-52 rounded-full bg-gradient-to-br from-primary/12 via-accent/8 to-primary/6 border-2 border-primary/10 shadow-xl flex items-center justify-center"
+        >
+          <div className="text-center">
+            <p className="text-primary/30 text-[10px] font-bold tracking-widest uppercase">Since</p>
+            <p className="text-primary/25 text-4xl lg:text-5xl font-black">1944</p>
+          </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
@@ -54,7 +111,6 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden" data-testid="section-hero">
-      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
       <div className="absolute top-0 right-0 w-[60%] h-full bg-gradient-to-l from-primary/5 to-transparent" />
       <div className="absolute top-24 right-16 w-96 h-96 rounded-full bg-primary/5 blur-3xl" />
@@ -62,7 +118,6 @@ export default function HeroSection() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-20">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Text side */}
           <motion.div
             initial={{ opacity: 0, x: -32 }}
             animate={{ opacity: 1, x: 0 }}
@@ -103,14 +158,13 @@ export default function HeroSection() {
                   <ArrowRight size={16} className="rtl:rotate-180" />
                 </span>
               </Link>
-              <Link href="/quality" data-testid="link-view-quality">
+              <Link href="/contact" data-testid="link-view-categories">
                 <span className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl border border-border bg-card/60 backdrop-blur-sm text-foreground font-semibold text-sm hover:border-primary/40 hover:bg-card transition-all duration-200 cursor-pointer">
-                  {t("hero.view_categories")}
+                  Contact Us
                 </span>
               </Link>
             </div>
 
-            {/* Stats */}
             <div className="flex gap-8 mt-12 pt-8 border-t border-border/50">
               {[
                 { value: "200+", key: "hero.stat_products" },
@@ -125,7 +179,6 @@ export default function HeroSection() {
             </div>
           </motion.div>
 
-          {/* Product visual side */}
           <motion.div
             initial={{ opacity: 0, x: 32 }}
             animate={{ opacity: 1, x: 0 }}
@@ -133,41 +186,12 @@ export default function HeroSection() {
             className="flex justify-center lg:justify-end"
           >
             <div className="relative w-full max-w-md" data-testid="img-hero-product">
-              <motion.div
-                animate={{ y: [-10, 10, -10] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <ProductShowcase />
-              </motion.div>
-
-              {/* Floating badge – 200+ products */}
-              <motion.div
-                animate={{ y: [-4, 4, -4] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="absolute top-6 -left-4 rtl:left-auto rtl:-right-4 bg-card shadow-xl rounded-2xl p-3 border border-border"
-              >
-                <p className="text-xs font-bold text-foreground">{t("hero.badge_200")}</p>
-                <p className="text-[10px] text-muted-foreground">{t("hero.badge_in_catalog")}</p>
-              </motion.div>
-
-              {/* Floating badge – In Stock */}
-              <motion.div
-                animate={{ y: [-4, 4, -4] }}
-                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute bottom-12 -right-4 rtl:right-auto rtl:-left-4 bg-card shadow-xl rounded-2xl p-3 border border-border"
-              >
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  <p className="text-xs font-bold text-foreground">{t("hero.badge_in_stock")}</p>
-                </div>
-                <p className="text-[10px] text-muted-foreground">{t("hero.badge_updated_live")}</p>
-              </motion.div>
+              <FloatingBiscuits />
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

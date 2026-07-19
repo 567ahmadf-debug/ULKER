@@ -3,8 +3,8 @@ import { Mail, MapPin, Phone, Clock, MessageSquare, Globe } from "lucide-react";
 import Footer from "@/components/layout/Footer";
 
 const contacts = [
-  { icon: MapPin, title: "Headquarters", lines: ["Kısıklı Mah., Ferah Cad. No:1", "Üsküdar, İstanbul, Türkiye"] },
-  { icon: Phone, title: "Phone", lines: ["+90 (216) 524 24 24", "+90 (216) 524 24 25 (Fax)"] },
+  { icon: MapPin, title: "Headquarters", lines: ["Rif Dimashq - Arbeen " , "Ahmad Alfarran"] },
+  { icon: Phone, title: "Phone", lines: ["+963 999999999"] },
   { icon: Mail, title: "Email", lines: ["info@ulker.com.tr", "press@ulker.com.tr"] },
   { icon: Clock, title: "Hours", lines: ["Monday–Friday: 08:30–18:00", "Saturday: 09:00–13:00"] },
 ];

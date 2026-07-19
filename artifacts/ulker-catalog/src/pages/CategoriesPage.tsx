@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, Cookie, Layers, Coffee, Cake, Wheat, Star, Package, Candy } from "lucide-react";
 import { categoryData } from "@/data/categories";
-import { products, getProductsByCategory } from "@/data/products";
+import { getAllProducts, getProductsByCategory } from "@/data/admin-store";
 import Footer from "@/components/layout/Footer";
 
 const icons = [Cookie, Layers, Wheat, Coffee, Cake, Layers, Candy, Package];

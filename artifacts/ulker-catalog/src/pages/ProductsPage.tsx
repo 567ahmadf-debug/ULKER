@@ -1,7 +1,8 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, SlidersHorizontal, X, ChevronDown } from "lucide-react";
-import { products, categories } from "@/data/products";
+import { categories } from "@/data/products";
+import { getAllProducts } from "@/data/admin-store";
 import ProductCard from "@/components/products/ProductCard";
 import Footer from "@/components/layout/Footer";
 import { useTranslation } from "react-i18next";
@@ -25,6 +26,7 @@ export default function ProductsPage() {
   const [selectedWeight, setSelectedWeight] = useState("All");
   const [sort, setSort] = useState("Popular");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const products = useMemo(() => getAllProducts(), []);
 
   const sortOptions = [
     { value: "Popular", label: t("products.popular") },

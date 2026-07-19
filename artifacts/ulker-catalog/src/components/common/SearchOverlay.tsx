@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Search, X, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
-import { products } from "@/data/products";
+import { getAllProducts } from "@/data/admin-store";
 import { useTranslation } from "react-i18next";
 
 interface SearchOverlayProps {
@@ -32,7 +32,7 @@ export default function SearchOverlay({ open, onClose }: SearchOverlayProps) {
   }, [onClose]);
 
   const results = query.trim().length >= 2
-    ? products
+    ? getAllProducts()
         .filter(
           (p) =>
             p.name.toLowerCase().includes(query.toLowerCase()) ||

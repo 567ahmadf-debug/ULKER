@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import { products } from "@/data/products";
+import { getAllProducts } from "@/data/admin-store";
 import ProductCard from "@/components/products/ProductCard";
 
-const featured = products.filter((p) => p.isPopular).slice(0, 6);
+const featured = getAllProducts().filter((p) => p.isPopular).slice(0, 6);
 
 export default function FeaturedProducts() {
   return (

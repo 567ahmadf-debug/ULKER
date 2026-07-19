@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams, Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ChevronDown, ChevronUp, Package, Info, Leaf, AlertTriangle } from "lucide-react";
-import { getProductById, getRelatedProducts } from "@/data/products";
+import { getProductById, getRelatedProducts } from "@/data/admin-store";
 import ImageGallery from "@/components/products/ImageGallery";
 import StockStatus from "@/components/products/StockStatus";
 import ProductCard from "@/components/products/ProductCard";
