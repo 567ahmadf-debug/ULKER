@@ -2,7 +2,6 @@ import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Tag, Clock, CheckCircle, AlertCircle, Calendar, Sparkles, Package } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "wouter";
 import { getAllOffers, refreshOffersFromServer, type Offer } from "@/data/admin-store";
 import { resolveImageUrl } from "@/lib/utils";
 
@@ -197,7 +196,6 @@ function PriceSection({ offer }: { offer: Offer }) {
 
 export default function OffersPage() {
   const { t } = useTranslation();
-  const [, navigate] = useLocation();
   const [offers, setOffers] = useState<Offer[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -265,8 +263,7 @@ export default function OffersPage() {
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.06, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  onClick={() => navigate(`/offers/${offer.id}`)}
-                  className={`offer-card-premium bg-card rounded-[24px] overflow-hidden flex flex-col border border-border/60 cursor-pointer ${
+                  className={`offer-card-premium bg-card rounded-[24px] overflow-hidden flex flex-col border border-border/60 ${
                     status === "expired" ? "opacity-50 grayscale-[30%]" : ""
                   }`}
                   style={{ boxShadow: "0 4px 24px -4px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.03)" }}

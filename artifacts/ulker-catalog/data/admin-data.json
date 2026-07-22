@@ -801,138 +801,6 @@
         "altin-bisküvi",
         "hanımeller"
       ]
-    },
-    {
-      "id": "test",
-      "name": "test",
-      "category": "Biscuits",
-      "description": "",
-      "shortDescription": "",
-      "stockStatus": "in_stock",
-      "sku": "",
-      "barcode": "",
-      "country": "Türkiye",
-      "shelfLife": "",
-      "isNew": false,
-      "isPopular": true,
-      "packaging": {
-        "weight": "",
-        "pieces": 1,
-        "cartonQty": 1,
-        "packageType": "",
-        "dimensions": ""
-      },
-      "nutrition": {
-        "servingSize": "",
-        "calories": 0,
-        "protein": 0,
-        "fat": 0,
-        "saturatedFat": 0,
-        "carbs": 0,
-        "sugar": 0,
-        "fiber": 0,
-        "salt": 0
-      },
-      "ingredients": "",
-      "allergens": {
-        "contains": [],
-        "mayContain": []
-      },
-      "taste": "",
-      "texture": "",
-      "storageInstructions": "",
-      "servingSuggestions": "",
-      "imageUrl": "/uploads/1784731015446-f6f76949.png",
-      "thumbnails": [],
-      "relatedProductIds": []
-    },
-    {
-      "id": "test",
-      "name": "test",
-      "category": "Biscuits",
-      "description": "",
-      "shortDescription": "",
-      "stockStatus": "in_stock",
-      "sku": "",
-      "barcode": "",
-      "country": "Türkiye",
-      "shelfLife": "",
-      "isNew": false,
-      "isPopular": false,
-      "packaging": {
-        "weight": "",
-        "pieces": 1,
-        "cartonQty": 1,
-        "packageType": "",
-        "dimensions": ""
-      },
-      "nutrition": {
-        "servingSize": "",
-        "calories": 0,
-        "protein": 0,
-        "fat": 0,
-        "saturatedFat": 0,
-        "carbs": 0,
-        "sugar": 0,
-        "fiber": 0,
-        "salt": 0
-      },
-      "ingredients": "",
-      "allergens": {
-        "contains": [],
-        "mayContain": []
-      },
-      "taste": "",
-      "texture": "",
-      "storageInstructions": "",
-      "servingSuggestions": "",
-      "imageUrl": "/uploads/1784732248377-4303cb30.png",
-      "thumbnails": [],
-      "relatedProductIds": []
-    },
-    {
-      "id": "testtttttttttt",
-      "name": "testtttttttttt",
-      "category": "Biscuits",
-      "description": "",
-      "shortDescription": "",
-      "stockStatus": "in_stock",
-      "sku": "",
-      "barcode": "",
-      "country": "Türkiye",
-      "shelfLife": "",
-      "isNew": true,
-      "isPopular": false,
-      "packaging": {
-        "weight": "",
-        "pieces": 1,
-        "cartonQty": 1,
-        "packageType": "",
-        "dimensions": ""
-      },
-      "nutrition": {
-        "servingSize": "",
-        "calories": 0,
-        "protein": 0,
-        "fat": 0,
-        "saturatedFat": 0,
-        "carbs": 0,
-        "sugar": 0,
-        "fiber": 0,
-        "salt": 0
-      },
-      "ingredients": "",
-      "allergens": {
-        "contains": [],
-        "mayContain": []
-      },
-      "taste": "",
-      "texture": "",
-      "storageInstructions": "",
-      "servingSuggestions": "",
-      "imageUrl": "/uploads/1784733372678-8bbe1cd0.png",
-      "thumbnails": [],
-      "relatedProductIds": []
     }
   ],
   "deletedIds": [
@@ -947,7 +815,9 @@
     "yupi",
     "cici",
     "dore",
-    "börekçi"
+    "börekçi",
+    "testtttttttttt",
+    "test"
   ],
   "settings": {
     "floatingImageUrls": [
