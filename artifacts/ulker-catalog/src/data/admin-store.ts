@@ -1,5 +1,10 @@
 import { products as staticProducts, type Product } from "@/data/products";
 
+// Embedded data from data/ folder — these get baked into the build
+import adminDataJson from "../../data/admin-data.json";
+import offersJson from "../../data/offers.json";
+import favoritesJson from "../../data/favorites.json";
+
 const STORAGE_KEY = "ulker-admin-products";
 const DELETED_KEY = "ulker-admin-deleted";
 const SETTINGS_KEY = "ulker-admin-settings";
@@ -112,12 +117,20 @@ async function initFromServer() {
   if (initialized) return;
   initialized = true;
 
+  // 1) Try local dev server first (for live editing)
   const serverData = await fetchAdminData();
   if (serverData) {
     if (serverData.overrides) localStorage.setItem(STORAGE_KEY, JSON.stringify(serverData.overrides));
     if (serverData.deletedIds) localStorage.setItem(DELETED_KEY, JSON.stringify(serverData.deletedIds));
     if (serverData.settings) localStorage.setItem(SETTINGS_KEY, JSON.stringify(serverData.settings));
+    return;
   }
+
+  // 2) Fallback: use embedded JSON data from the build (for GitHub Pages)
+  const embedded = adminDataJson as Record<string, unknown>;
+  if (embedded.overrides) localStorage.setItem(STORAGE_KEY, JSON.stringify(embedded.overrides));
+  if (embedded.deletedIds) localStorage.setItem(DELETED_KEY, JSON.stringify(embedded.deletedIds));
+  if (embedded.settings) localStorage.setItem(SETTINGS_KEY, JSON.stringify(embedded.settings));
 }
 
 initFromServer();
@@ -262,6 +275,15 @@ async function fetchOffersFromServer(): Promise<Offer[]> {
       }
     }
   } catch {}
+
+  // Fallback: use embedded JSON from the build
+  if (Array.isArray(offersJson) && offersJson.length > 0) {
+    const migrated = offersJson.map(migrateOffer);
+    offersCache = migrated;
+    localStorage.setItem(OFFERS_KEY, JSON.stringify(migrated));
+    return migrated;
+  }
+
   return loadOffersLocal();
 }
 
@@ -346,6 +368,13 @@ export async function fetchServerFavorites(): Promise<Record<string, number>> {
       return data;
     }
   } catch {}
+
+  // Fallback: use embedded JSON from the build
+  if (favoritesJson && typeof favoritesJson === "object") {
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favoritesJson));
+    return favoritesJson as Record<string, number>;
+  }
+
   return getFavorites();
 }
 
