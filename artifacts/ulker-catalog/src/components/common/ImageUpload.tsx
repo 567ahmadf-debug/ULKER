@@ -1,7 +1,5 @@
 import { useState, useRef, useCallback } from "react";
-import { Upload, X, Image as ImageIcon } from "lucide-react";
-import { uploadImageToCloud } from "@/data/cloud-store";
-import { CLOUD_CONFIG } from "@/data/cloud-config";
+import { Upload, X, Image as ImageIcon, Link } from "lucide-react";
 
 const MAX_SIZE_MB = 5;
 const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
@@ -44,6 +42,8 @@ export default function ImageUpload({ value, onChange, label = "Image" }: ImageU
   const [dragOver, setDragOver] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [mode, setMode] = useState<"upload" | "url">("upload");
+  const [urlInput, setUrlInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const processFile = useCallback(
@@ -60,7 +60,6 @@ export default function ImageUpload({ value, onChange, label = "Image" }: ImageU
 
       setLoading(true);
       try {
-        // 1) Resize the image
         let dataUrl: string;
         if (file.type === "image/svg+xml") {
           dataUrl = await new Promise<string>((resolve, reject) => {
@@ -73,18 +72,7 @@ export default function ImageUpload({ value, onChange, label = "Image" }: ImageU
           dataUrl = await resizeImage(file);
         }
 
-        // 2) Try cloud upload (imgbb) if configured
-        if (CLOUD_CONFIG.IMGBB_API_KEY) {
-          try {
-            const url = await uploadImageToCloud(file);
-            onChange(url);
-            return;
-          } catch (cloudErr) {
-            console.warn("[ImageUpload] Cloud upload failed, trying local:", cloudErr);
-          }
-        }
-
-        // 3) Fallback: try local dev server
+        // Try local dev server upload
         try {
           const base64 = dataUrl.includes(",") ? dataUrl.split(",")[1] : dataUrl;
           const res = await fetch("/api/upload-image", {
@@ -99,7 +87,7 @@ export default function ImageUpload({ value, onChange, label = "Image" }: ImageU
           }
         } catch {}
 
-        // 4) Final fallback: store as base64 data URL
+        // Fallback: base64 data URL
         onChange(dataUrl);
       } catch (err) {
         console.error("[ImageUpload] Upload failed:", err);
@@ -137,6 +125,14 @@ export default function ImageUpload({ value, onChange, label = "Image" }: ImageU
     [processFile]
   );
 
+  const handleUrlSubmit = useCallback(() => {
+    const trimmed = urlInput.trim();
+    if (!trimmed) return;
+    setError(null);
+    onChange(trimmed);
+    setUrlInput("");
+  }, [urlInput, onChange]);
+
   const handleRemove = useCallback(
     (e: React.MouseEvent) => {
       e.stopPropagation();
@@ -151,71 +147,113 @@ export default function ImageUpload({ value, onChange, label = "Image" }: ImageU
       <label className="text-xs font-semibold text-muted-foreground block mb-1.5">
         {label}
       </label>
-      <div
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onClick={() => !loading && inputRef.current?.click()}
-        className={`relative border-2 border-dashed rounded-xl p-4 text-center cursor-pointer transition-all ${
-          dragOver
-            ? "border-primary bg-primary/5"
-            : value
-            ? "border-border bg-card"
-            : "border-border hover:border-primary/40 bg-background"
-        } ${loading ? "opacity-60 pointer-events-none" : ""}`}
-      >
-        <input
-          ref={inputRef}
-          type="file"
-          accept={ALLOWED_TYPES.join(",")}
-          onChange={handleFileSelect}
-          className="hidden"
-        />
-        {loading ? (
-          <div className="py-2">
-            <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center mx-auto mb-2 animate-pulse">
-              <Upload size={18} className="text-primary" />
-            </div>
-            <p className="text-sm font-medium text-foreground">Uploading image...</p>
-          </div>
-        ) : value ? (
-          <div className="flex items-center gap-4">
-            <img
-              src={value}
-              alt="Upload preview"
-              className="w-20 h-20 rounded-lg object-cover border border-border flex-shrink-0"
-            />
-            <div className="flex-1 text-left min-w-0">
-              <p className="text-sm font-medium text-foreground truncate">Image uploaded</p>
-              <p className="text-xs text-muted-foreground mt-0.5">Click or drop to replace</p>
-            </div>
-            <button
-              type="button"
-              onClick={handleRemove}
-              className="p-1.5 rounded-lg hover:bg-red-50 transition-colors flex-shrink-0"
-              title="Remove image"
-            >
-              <X size={16} className="text-red-500" />
-            </button>
-          </div>
-        ) : (
-          <div className="py-2">
-            <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center mx-auto mb-2">
-              {dragOver ? (
-                <Upload size={18} className="text-primary" />
-              ) : (
-                <ImageIcon size={18} className="text-muted-foreground" />
-              )}
-            </div>
-            <p className="text-sm font-medium text-foreground">
-              {dragOver ? "Drop image here" : "Click or drag image here"}
-            </p>
-            <p className="text-xs text-muted-foreground mt-1">
-              JPEG, PNG, WebP, GIF, SVG — Max {MAX_SIZE_MB}MB
-            </p>
-          </div>
-        )}
+
+      <div className="flex gap-1 mb-2">
+        <button
+          type="button"
+          onClick={() => setMode("upload")}
+          className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-colors ${
+            mode === "upload" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:bg-muted/80"
+          }`}
+        >
+          <Upload size={12} /> رفع ملف
+        </button>
+        <button
+          type="button"
+          onClick={() => setMode("url")}
+          className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-colors ${
+            mode === "url" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:bg-muted/80"
+          }`}
+        >
+          <Link size={12} /> رابط يدوي
+        </button>
       </div>
+
+      {mode === "url" ? (
+        <div className="flex gap-2">
+          <input
+            type="text"
+            value={urlInput}
+            onChange={(e) => setUrlInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleUrlSubmit()}
+            placeholder="/ULKER/uploads/image.png"
+            className="flex-1 px-3 py-2 border border-border rounded-lg bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+          />
+          <button
+            type="button"
+            onClick={handleUrlSubmit}
+            className="px-3 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors"
+          >
+            تطبيق
+          </button>
+        </div>
+      ) : (
+        <div
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onClick={() => !loading && inputRef.current?.click()}
+          className={`relative border-2 border-dashed rounded-xl p-4 text-center cursor-pointer transition-all ${
+            dragOver
+              ? "border-primary bg-primary/5"
+              : value
+              ? "border-border bg-card"
+              : "border-border hover:border-primary/40 bg-background"
+          } ${loading ? "opacity-60 pointer-events-none" : ""}`}
+        >
+          <input
+            ref={inputRef}
+            type="file"
+            accept={ALLOWED_TYPES.join(",")}
+            onChange={handleFileSelect}
+            className="hidden"
+          />
+          {loading ? (
+            <div className="py-2">
+              <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center mx-auto mb-2 animate-pulse">
+                <Upload size={18} className="text-primary" />
+              </div>
+              <p className="text-sm font-medium text-foreground">Uploading image...</p>
+            </div>
+          ) : value ? (
+            <div className="flex items-center gap-4">
+              <img
+                src={value}
+                alt="Upload preview"
+                className="w-20 h-20 rounded-lg object-cover border border-border flex-shrink-0"
+              />
+              <div className="flex-1 text-left min-w-0">
+                <p className="text-sm font-medium text-foreground truncate">Image uploaded</p>
+                <p className="text-xs text-muted-foreground mt-0.5">Click or drop to replace</p>
+              </div>
+              <button
+                type="button"
+                onClick={handleRemove}
+                className="p-1.5 rounded-lg hover:bg-red-50 transition-colors flex-shrink-0"
+                title="Remove image"
+              >
+                <X size={16} className="text-red-500" />
+              </button>
+            </div>
+          ) : (
+            <div className="py-2">
+              <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center mx-auto mb-2">
+                {dragOver ? (
+                  <Upload size={18} className="text-primary" />
+                ) : (
+                  <ImageIcon size={18} className="text-muted-foreground" />
+                )}
+              </div>
+              <p className="text-sm font-medium text-foreground">
+                {dragOver ? "Drop image here" : "Click or drag image here"}
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">
+                JPEG, PNG, WebP, GIF, SVG — Max {MAX_SIZE_MB}MB
+              </p>
+            </div>
+          )}
+        </div>
+      )}
       {error && (
         <p className="text-red-500 text-xs mt-1.5">{error}</p>
       )}
