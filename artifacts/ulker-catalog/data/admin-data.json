@@ -801,6 +801,50 @@
         "altin-bisküvi",
         "hanımeller"
       ]
+    },
+    {
+      "id": "test",
+      "name": "test",
+      "category": "Biscuits",
+      "description": "",
+      "shortDescription": "",
+      "stockStatus": "in_stock",
+      "sku": "",
+      "barcode": "",
+      "country": "Türkiye",
+      "shelfLife": "",
+      "isNew": false,
+      "isPopular": true,
+      "packaging": {
+        "weight": "",
+        "pieces": 1,
+        "cartonQty": 1,
+        "packageType": "",
+        "dimensions": ""
+      },
+      "nutrition": {
+        "servingSize": "",
+        "calories": 0,
+        "protein": 0,
+        "fat": 0,
+        "saturatedFat": 0,
+        "carbs": 0,
+        "sugar": 0,
+        "fiber": 0,
+        "salt": 0
+      },
+      "ingredients": "",
+      "allergens": {
+        "contains": [],
+        "mayContain": []
+      },
+      "taste": "",
+      "texture": "",
+      "storageInstructions": "",
+      "servingSuggestions": "",
+      "imageUrl": "/uploads/1784731015446-f6f76949.png",
+      "thumbnails": [],
+      "relatedProductIds": []
     }
   ],
   "deletedIds": [
