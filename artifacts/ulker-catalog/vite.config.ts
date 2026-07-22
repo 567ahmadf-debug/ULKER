@@ -84,7 +84,7 @@ function uploadPlugin() {
             fs.mkdirSync(uploadsDir, { recursive: true });
             fs.writeFileSync(filePath, fileBuffer);
 
-            const publicUrl = `/uploads/${safeName}`;
+            const publicUrl = `${basePath}uploads/${safeName}`;
             res.setHeader("Content-Type", "application/json");
             res.end(JSON.stringify({ url: publicUrl }));
           } catch (err) {

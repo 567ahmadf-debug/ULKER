@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { ArrowRight, Cookie, Layers, Coffee, Cake, Wheat, Star, Package, Candy } from "lucide-react";
 import { categoryData } from "@/data/categories";
 import { getAllProducts, getProductsByCategory } from "@/data/admin-store";
+import { resolveImageUrl } from "@/lib/utils";
 import Footer from "@/components/layout/Footer";
 
 const icons = [Cookie, Layers, Wheat, Coffee, Cake, Layers, Candy, Package];
@@ -71,7 +72,7 @@ export default function CategoriesPage() {
                       >
                         <div className="aspect-square bg-muted overflow-hidden">
                           <img
-                            src={product.imageUrl}
+                            src={resolveImageUrl(product.imageUrl)}
                             alt={product.name}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-400"
                             loading="lazy"

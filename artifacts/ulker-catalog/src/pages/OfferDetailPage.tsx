@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Tag, Clock, CheckCircle, AlertCircle, Calendar, Package, Sparkles } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { getAllOffers, refreshOffersFromServer, type Offer } from "@/data/admin-store";
+import { resolveImageUrl } from "@/lib/utils";
 import { useState, useEffect } from "react";
 
 type OfferStatus = "active" | "upcoming" | "expired";
@@ -94,7 +95,7 @@ export default function OfferDetailPage() {
           {offer.images.length > 0 && (
             <div className="relative rounded-3xl overflow-hidden bg-[#FAFAFA] dark:bg-muted aspect-video flex items-center justify-center mb-8">
               <img
-                src={offer.images[offer.coverIndex] || offer.images[0]}
+                src={resolveImageUrl(offer.images[offer.coverIndex] || offer.images[0])}
                 alt={offer.title}
                 className="w-full h-full object-contain"
               />

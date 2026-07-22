@@ -3,6 +3,7 @@ import { useParams, Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ChevronDown, ChevronUp, Package, Info, Leaf, AlertTriangle } from "lucide-react";
 import { getProductById, getRelatedProducts } from "@/data/admin-store";
+import { resolveImageUrl } from "@/lib/utils";
 import ImageGallery from "@/components/products/ImageGallery";
 import StockStatus from "@/components/products/StockStatus";
 import ProductCard from "@/components/products/ProductCard";
@@ -113,7 +114,7 @@ export default function ProductDetailPage() {
                           className="flex items-center gap-2.5 p-2 rounded-xl hover:bg-muted transition-colors cursor-pointer group"
                         >
                           <div className="w-10 h-10 rounded-lg overflow-hidden bg-muted shrink-0">
-                            <img src={rel.imageUrl} alt={rel.name} className="w-full h-full object-cover" />
+                            <img src={resolveImageUrl(rel.imageUrl)} alt={rel.name} className="w-full h-full object-cover" />
                           </div>
                           <div className="min-w-0">
                             <p className="text-xs font-semibold text-foreground truncate group-hover:text-primary transition-colors">{rel.name}</p>

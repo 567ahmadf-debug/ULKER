@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Search, X, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { getAllProducts } from "@/data/admin-store";
+import { resolveImageUrl } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
 
 interface SearchOverlayProps {
@@ -119,7 +120,7 @@ export default function SearchOverlay({ open, onClose }: SearchOverlayProps) {
                         >
                           <div className="w-10 h-10 rounded-lg bg-[#FAFAFA] dark:bg-muted overflow-hidden shrink-0 flex items-center justify-center">
                             <img
-                              src={product.imageUrl}
+                              src={resolveImageUrl(product.imageUrl)}
                               alt={product.name}
                               className="w-8 h-8 object-contain"
                             />

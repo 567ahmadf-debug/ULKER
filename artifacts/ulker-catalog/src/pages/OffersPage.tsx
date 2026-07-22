@@ -4,6 +4,7 @@ import { Tag, Clock, CheckCircle, AlertCircle, Calendar, Sparkles, Package } fro
 import { useTranslation } from "react-i18next";
 import { useLocation } from "wouter";
 import { getAllOffers, refreshOffersFromServer, type Offer } from "@/data/admin-store";
+import { resolveImageUrl } from "@/lib/utils";
 
 type OfferStatus = "active" | "upcoming" | "expired";
 
@@ -49,7 +50,7 @@ function ImageGrid({ images, title }: { images: string[]; title: string }) {
     return (
       <div className="flex items-center justify-center p-8 min-h-[240px]">
         <div className="w-full max-w-[200px] aspect-square flex items-center justify-center">
-          <img src={images[0]} alt={title}
+          <img src={resolveImageUrl(images[0])} alt={title}
             className={`max-w-full max-h-full object-contain ${imgClass} ${floatDelays[0]}`} />
         </div>
       </div>
@@ -61,7 +62,7 @@ function ImageGrid({ images, title }: { images: string[]; title: string }) {
       <div className="flex items-center justify-center gap-3 p-6 min-h-[220px]">
         {images.map((url, i) => (
           <div key={i} className="flex-1 max-w-[48%] aspect-square flex items-center justify-center">
-            <img src={url} alt={`${title} ${i + 1}`}
+            <img src={resolveImageUrl(url)} alt={`${title} ${i + 1}`}
               className={`max-w-full max-h-full object-contain ${imgClass} ${floatDelays[i % 4]}`} />
           </div>
         ))}
@@ -73,13 +74,13 @@ function ImageGrid({ images, title }: { images: string[]; title: string }) {
     return (
       <div className="flex items-stretch gap-3 p-6 min-h-[260px]">
         <div className="flex-[1.1] max-w-[48%] aspect-square flex items-center justify-center">
-          <img src={images[0]} alt={title}
+          <img src={resolveImageUrl(images[0])} alt={title}
             className={`max-w-full max-h-full object-contain ${imgClass} ${floatDelays[0]}`} />
         </div>
         <div className="flex-1 flex flex-col gap-3 justify-center">
           {images.slice(1).map((url, i) => (
             <div key={i} className="flex-1 aspect-square flex items-center justify-center">
-              <img src={url} alt={`${title} ${i + 2}`}
+              <img src={resolveImageUrl(url)} alt={`${title} ${i + 2}`}
                 className={`max-w-full max-h-full object-contain ${imgClass} ${floatDelays[(i + 1) % 4]}`} />
             </div>
           ))}
@@ -93,7 +94,7 @@ function ImageGrid({ images, title }: { images: string[]; title: string }) {
       <div className="grid grid-cols-2 gap-3 p-6 min-h-[260px]">
         {images.map((url, i) => (
           <div key={i} className="aspect-square flex items-center justify-center">
-            <img src={url} alt={`${title} ${i + 1}`}
+            <img src={resolveImageUrl(url)} alt={`${title} ${i + 1}`}
               className={`max-w-full max-h-full object-contain ${imgClass} ${floatDelays[i % 4]}`} />
           </div>
         ))}
@@ -106,7 +107,7 @@ function ImageGrid({ images, title }: { images: string[]; title: string }) {
     <div className="relative grid grid-cols-2 gap-3 p-6 min-h-[260px]">
       {images.slice(0, 4).map((url, i) => (
         <div key={i} className="aspect-square flex items-center justify-center">
-          <img src={url} alt={`${title} ${i + 1}`}
+          <img src={resolveImageUrl(url)} alt={`${title} ${i + 1}`}
             className={`max-w-full max-h-full object-contain ${imgClass} ${floatDelays[i % 4]}`} />
         </div>
       ))}

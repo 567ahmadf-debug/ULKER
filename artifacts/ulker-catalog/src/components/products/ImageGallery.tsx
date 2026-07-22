@@ -1,4 +1,5 @@
 import { Product } from "@/data/products";
+import { resolveImageUrl } from "@/lib/utils";
 
 interface ImageGalleryProps {
   product: Product;
@@ -25,7 +26,7 @@ export default function ImageGallery({ product }: ImageGalleryProps) {
 
         {/* Floating product image */}
         <img
-          src={product.imageUrl}
+          src={resolveImageUrl(product.imageUrl)}
           alt={product.name}
           className="w-3/4 h-3/4 object-contain relative z-10 will-change-transform
             transition-all duration-300 ease-in-out

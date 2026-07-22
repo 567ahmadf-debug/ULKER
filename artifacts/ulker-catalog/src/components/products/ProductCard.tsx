@@ -6,6 +6,7 @@ import { Product } from "@/data/products";
 import StockStatus from "./StockStatus";
 import { useTranslation } from "react-i18next";
 import { getMyFavorites, toggleFavorite } from "@/data/admin-store";
+import { resolveImageUrl } from "@/lib/utils";
 
 interface ProductCardProps {
   product: Product;
@@ -39,7 +40,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
       <div className="relative aspect-square bg-[#FAFAFA] dark:bg-muted">
         {/* Floating product image */}
         <img
-          src={product.imageUrl}
+          src={resolveImageUrl(product.imageUrl)}
           alt={product.name}
           loading="lazy"
           className="absolute inset-0 m-auto w-[calc(100%-2rem)] h-[calc(100%-2rem)] object-contain z-[1]
