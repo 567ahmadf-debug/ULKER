@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { getSettings } from "@/data/admin-store";
+import { resolveImageUrl } from "@/lib/utils";
 
 const ADMIN_POSITIONS = [
   { x: "5%", y: "5%", size: "w-28 h-28 lg:w-40 lg:h-40", rotate: -10 },
@@ -47,7 +48,7 @@ function FloatingBiscuits() {
               style={{ left: pos.x, top: pos.y, transform: `rotate(${pos.rotate}deg)` }}
             >
               <img
-                src={url}
+                src={resolveImageUrl(url)}
                 alt={`Biscuit ${i + 1}`}
                 className={`${pos.size} object-contain drop-shadow-lg`}
                 style={{ background: "transparent" }}
