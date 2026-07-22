@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight, Star, Share2 } from "lucide-react";
 import { Product } from "@/data/products";
 import StockStatus from "./StockStatus";
 import { useTranslation } from "react-i18next";
 import { getMyFavorites, toggleFavorite } from "@/data/admin-store";
 import { resolveImageUrl } from "@/lib/utils";
+import { shareProduct } from "@/lib/share";
 
 interface ProductCardProps {
   product: Product;
@@ -17,7 +18,6 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const { t } = useTranslation();
   const [isFav, setIsFav] = useState(() => getMyFavorites().includes(product.id));
 
-  // Deterministic per-product float duration (5.0–7.0s) and delay
   const floatDuration = 5 + (((index * 7 + 3) % 20) / 10);
   const floatDelay = ((index * 1.3) % 3).toFixed(1);
 
@@ -26,6 +26,12 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
     e.stopPropagation();
     const next = toggleFavorite(product.id);
     setIsFav(next.includes(product.id));
+  };
+
+  const handleShare = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    shareProduct(product);
   };
 
   return (
@@ -37,8 +43,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
       className="group bg-card border border-card-border rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
     >
       {/* Image */}
-      <div className="relative aspect-square bg-[#FAFAFA] dark:bg-muted">
-        {/* Floating product image */}
+      <div className="relative aspect-square bg-[#FAFAFA] dark:bg-muted overflow-hidden">
         <img
           src={resolveImageUrl(product.imageUrl)}
           alt={product.name}
@@ -52,7 +57,6 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           }}
         />
 
-        {/* Floating shadow — moves in sync with the float */}
         <div
           className="absolute bottom-6 left-1/2 w-[55%] h-[8px] rounded-[50%] bg-black/10
             blur-[6px] z-0
@@ -77,22 +81,33 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             </span>
           )}
         </div>
-
-        {/* Favorite star button */}
-        <button
-          onClick={handleToggleFav}
-          className="absolute top-3 right-3 rtl:right-auto rtl:left-3 p-1.5 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background transition-colors z-10"
-          aria-label={isFav ? "Remove from favorites" : "Add to favorites"}
-        >
-          <Star
-            size={16}
-            className={isFav ? "text-amber-400 fill-amber-400" : "text-muted-foreground"}
-          />
-        </button>
       </div>
 
       {/* Content */}
       <div className="p-4">
+        {/* Action buttons row */}
+        <div className="flex items-center justify-end gap-1 mb-2 -mt-1">
+          <button
+            type="button"
+            onClick={handleShare}
+            className="p-2 rounded-lg hover:bg-muted active:bg-muted transition-colors"
+            aria-label="Share product"
+          >
+            <Share2 size={15} className="text-muted-foreground" />
+          </button>
+          <button
+            type="button"
+            onClick={handleToggleFav}
+            className="p-2 rounded-lg hover:bg-muted active:bg-muted transition-colors"
+            aria-label={isFav ? "Remove from favorites" : "Add to favorites"}
+          >
+            <Star
+              size={15}
+              className={isFav ? "text-amber-400 fill-amber-400" : "text-muted-foreground"}
+            />
+          </button>
+        </div>
+
         <div className="mb-2">
           <p className="text-xs font-medium text-muted-foreground mb-1">{product.category}</p>
           <h3

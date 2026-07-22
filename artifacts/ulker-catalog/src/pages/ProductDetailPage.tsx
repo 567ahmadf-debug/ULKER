@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useParams, Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ChevronDown, ChevronUp, Package, Info, Leaf, AlertTriangle } from "lucide-react";
+import { ArrowLeft, ChevronDown, ChevronUp, Package, Info, Leaf, AlertTriangle, Share2 } from "lucide-react";
 import { getProductById, getRelatedProducts } from "@/data/admin-store";
 import { resolveImageUrl } from "@/lib/utils";
+import { shareProduct } from "@/lib/share";
 import ImageGallery from "@/components/products/ImageGallery";
 import StockStatus from "@/components/products/StockStatus";
 import ProductCard from "@/components/products/ProductCard";
@@ -146,7 +147,14 @@ export default function ProductDetailPage() {
               <h1 className="text-xl font-black text-foreground mb-2" data-testid="text-product-detail-name">
                 {product.name}
               </h1>
-              <p className="text-sm text-muted-foreground leading-relaxed">{product.shortDescription}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4">{product.shortDescription}</p>
+              <button
+                onClick={() => shareProduct(product)}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary/8 hover:bg-primary hover:text-primary-foreground text-primary text-sm font-semibold transition-all duration-200"
+              >
+                <Share2 size={14} />
+                Share Product
+              </button>
             </div>
 
             {/* Stock Status */}
