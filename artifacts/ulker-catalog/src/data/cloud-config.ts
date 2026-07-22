@@ -8,10 +8,10 @@
 
 export const CLOUD_CONFIG = {
   // imgbb API Key — للرفع المجاني للصور
-  IMGBB_API_KEY: "",
+  IMGBB_API_KEY: "263b8b6129dd7c8ff9b2a8483353c727",
 
   // Firebase Realtime Database URL — لمشاركة البيانات بين الجميع
-  FIREBASE_DB_URL: "",
+  FIREBASE_DB_URL: "https://ahmad005-71cc6-default-rtdb.firebaseio.com",
 };
 
 // فحص: هل الإعدادات جاهزة؟
