@@ -7,7 +7,8 @@
     "images": [
       "/uploads/1784464252554-3ac3a081.png",
       "/uploads/1784464256642-15e0d56c.png",
-      "/uploads/1784464262225-3e64e675.png"
+      "/uploads/1784464262225-3e64e675.png",
+      "/uploads/1784810268836-3242a3a7.png"
     ],
     "coverIndex": 0,
     "bundleItems": [
@@ -54,10 +55,10 @@
     "offerPrice": "26.25",
     "discountPercent": "25",
     "discountAmount": "",
-    "savingPercent": "25",
     "offerType": "Ulker Dark Chocolate",
     "badgeColor": "#184ae2",
     "isFeatured": false,
+    "savingPercent": "25",
     "startsAt": "2026-07-19",
     "endsAt": "2026-07-26"
   }

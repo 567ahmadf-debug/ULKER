@@ -9,8 +9,8 @@ import i18n from "@/i18n";
 const NAV_KEYS = [
   { href: "/", key: "nav.home", label: "Home" },
   { href: "/products", key: "nav.products", label: "Products" },
-  { href: "/offers", key: "nav.offers", label: "Categories" },
-  { href: "/about", key: "nav.about", label: "Offers" },
+  { href: "/categories", key: "nav.categories", label: "Categories" },
+  { href: "/offers", key: "nav.offers", label: "Offers" },
   { href: "/contact", key: "nav.contact", label: "Contact" },
 ];
 
@@ -54,12 +54,12 @@ export default function Navbar() {
               <Link key={link.href} href={link.href} data-testid={`link-nav-${link.key.split(".")[1]}`}>
                 <span
                   className={`text-sm font-medium transition-colors cursor-pointer pb-1 ${
-                    location === link.href
+                    (link.href === "/" ? location === "/" : location.startsWith(link.href))
                       ? "text-primary font-semibold border-b-2 border-primary"
                       : "text-muted-foreground hover:text-primary"
                   }`}
                 >
-                  {link.label}
+                  {t(link.key)}
                 </span>
               </Link>
             ))}
@@ -145,12 +145,12 @@ export default function Navbar() {
                 <Link key={link.href} href={link.href} data-testid={`link-mobile-nav-${link.key.split(".")[1]}`}>
                   <span
                     className={`block px-3 py-2.5 text-sm font-medium rounded-lg transition-colors cursor-pointer ${
-                      location === link.href
+                      (link.href === "/" ? location === "/" : location.startsWith(link.href))
                         ? "text-primary bg-primary/8"
                         : "text-foreground/70 hover:text-foreground hover:bg-muted"
                     }`}
                   >
-                    {link.label}
+                    {t(link.key)}
                   </span>
                 </Link>
               ))}

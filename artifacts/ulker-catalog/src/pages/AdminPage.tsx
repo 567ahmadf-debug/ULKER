@@ -60,6 +60,7 @@ function emptyProduct(): Product {
   return {
     id: "",
     name: "",
+    nameAr: "",
     category: categoryData[0]?.name ?? "Biscuits",
     description: "",
     shortDescription: "",
@@ -163,7 +164,7 @@ function LoginForm({ onLogin }: { onLogin: () => void }) {
             value={pw}
             onChange={(e) => setPw(e.target.value)}
             placeholder="Enter admin password"
-            className={`w-full px-4 py-2.5 pr-10 rounded-xl border text-sm bg-background outline-none transition-all ${
+            className={`w-full px-4 py-2.5 pe-10 rounded-xl border text-sm bg-background outline-none transition-all ${
               error ? "border-red-500" : "border-border focus:border-primary"
             }`}
             autoFocus
@@ -171,7 +172,7 @@ function LoginForm({ onLogin }: { onLogin: () => void }) {
           <button
             type="button"
             onClick={() => setShowPw(!showPw)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+            className="absolute end-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
           >
             {showPw ? <EyeOff size={16} /> : <Eye size={16} />}
           </button>
@@ -245,12 +246,22 @@ function ProductForm({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Field label="Name" required>
+          <Field label="Name (English)" required>
             <input
               value={form.name}
               onChange={(e) => set("name", e.target.value)}
               className="input-field"
               required
+            />
+          </Field>
+
+          <Field label="Name (Arabic)">
+            <input
+              value={form.nameAr}
+              onChange={(e) => set("nameAr", e.target.value)}
+              className="input-field"
+              dir="rtl"
+              placeholder="الاسم بالعربي"
             />
           </Field>
 
@@ -473,7 +484,7 @@ function Field({
     <div>
       <label className="text-xs font-semibold text-muted-foreground block mb-1.5">
         {label}
-        {required && <span className="text-red-500 ml-0.5">*</span>}
+        {required && <span className="text-red-500 ms-0.5">*</span>}
       </label>
       {children}
     </div>
@@ -511,7 +522,9 @@ function OfferForm({
     id: "",
     type: "discount",
     title: "",
+    titleAr: "",
     description: "",
+    descriptionAr: "",
     images: [],
     coverIndex: 0,
     bundleItems: [{ productName: "", quantity: 1 }],
@@ -617,7 +630,7 @@ function OfferForm({
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${form.type === "bundle" ? "bg-primary/10" : "bg-muted"}`}>
                 <Layers size={20} className={form.type === "bundle" ? "text-primary" : "text-muted-foreground"} />
               </div>
-              <div className="text-left">
+              <div className="text-start">
                 <p className="text-sm font-semibold text-foreground">Bundle Offer</p>
                 <p className="text-xs text-muted-foreground">Multiple products, one price</p>
               </div>
@@ -634,7 +647,7 @@ function OfferForm({
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${form.type === "discount" ? "bg-primary/10" : "bg-muted"}`}>
                 <Tag size={20} className={form.type === "discount" ? "text-primary" : "text-muted-foreground"} />
               </div>
-              <div className="text-left">
+              <div className="text-start">
                 <p className="text-sm font-semibold text-foreground">Discount Offer</p>
                 <p className="text-xs text-muted-foreground">Percentage or fixed discount</p>
               </div>
@@ -644,9 +657,13 @@ function OfferForm({
 
         {/* Basic info */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Field label="Offer Title" required>
+          <Field label="Offer Title (English)" required>
             <input value={form.title} onChange={(e) => set("title", e.target.value)} className="input-field" required
               placeholder={form.type === "bundle" ? "e.g. Albeni Duo Offer" : "e.g. Chocolate Special Discount"} />
+          </Field>
+          <Field label="Offer Title (Arabic)">
+            <input value={form.titleAr} onChange={(e) => set("titleAr", e.target.value)} className="input-field" dir="rtl"
+              placeholder="مثال: عرض ألبينيثنائي" />
           </Field>
           <Field label="Badge Label">
             <input value={form.offerType} onChange={(e) => set("offerType", e.target.value)} className="input-field"
@@ -756,14 +773,14 @@ function OfferForm({
                 >
                   <img src={url} alt={`Upload ${idx + 1}`} className="w-full h-full object-contain p-1.5" />
                   {/* Drag handle */}
-                  <div className="absolute top-1 left-1 p-0.5 rounded bg-background/80 opacity-0 group-hover:opacity-100 transition-opacity cursor-grab">
+                  <div                     className="absolute top-1 start-1 p-0.5 rounded bg-background/80 opacity-0 group-hover:opacity-100 transition-opacity cursor-grab">
                     <GripVertical size={12} />
                   </div>
                   {/* Set as cover */}
                   <button
                     type="button"
                     onClick={() => set("coverIndex", idx)}
-                    className={`absolute top-1 right-1 p-0.5 rounded text-[8px] font-bold opacity-0 group-hover:opacity-100 transition-opacity ${
+                    className={`absolute top-1 end-1 p-0.5 rounded text-[8px] font-bold opacity-0 group-hover:opacity-100 transition-opacity ${
                       form.coverIndex === idx ? "bg-primary text-primary-foreground" : "bg-background/80 text-muted-foreground"
                     }`}
                     title="Set as cover"
@@ -780,11 +797,11 @@ function OfferForm({
                       else if (idx === cover) cover = 0;
                       setForm((f) => ({ ...f, images: imgs, coverIndex: Math.min(cover, Math.max(0, imgs.length - 1)) }));
                     }}
-                    className="absolute bottom-1 right-1 p-0.5 rounded-md bg-red-500 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
+                    className="absolute bottom-1 end-1 p-0.5 rounded-md bg-red-500 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
                   >
                     <X size={12} />
                   </button>
-                  <span className="absolute bottom-1 left-1 px-1 py-0.5 rounded bg-background/80 text-[8px] font-medium text-muted-foreground">
+                  <span className="absolute bottom-1 start-1 px-1 py-0.5 rounded bg-background/80 text-[8px] font-medium text-muted-foreground">
                     #{idx + 1}
                   </span>
                 </div>
@@ -796,10 +813,16 @@ function OfferForm({
         </div>
 
         {/* Description */}
-        <Field label="Description">
-          <textarea value={form.description} onChange={(e) => set("description", e.target.value)} className="input-field min-h-[80px]" rows={3}
-            placeholder="Describe the offer..." />
-        </Field>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Field label="Description (English)">
+            <textarea value={form.description} onChange={(e) => set("description", e.target.value)} className="input-field min-h-[80px]" rows={3}
+              placeholder="Describe the offer..." />
+          </Field>
+          <Field label="Description (Arabic)">
+            <textarea value={form.descriptionAr} onChange={(e) => set("descriptionAr", e.target.value)} className="input-field min-h-[80px]" rows={3} dir="rtl"
+              placeholder="صِف العرض بالعربية..." />
+          </Field>
+        </div>
 
         {/* Dates + Options row */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -821,7 +844,7 @@ function OfferForm({
               <div className="relative">
                 <input type="checkbox" checked={form.isFeatured} onChange={(e) => set("isFeatured", e.target.checked)} className="sr-only peer" />
                 <div className="w-10 h-5 bg-muted rounded-full peer peer-checked:bg-primary transition-colors" />
-                <div className="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform peer-checked:translate-x-5" />
+                <div className="absolute top-0.5 start-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform peer-checked:translate-x-5" />
               </div>
               <span className="text-sm font-medium text-foreground">Featured</span>
               <Sparkles size={14} className="text-amber-400" />
@@ -931,23 +954,19 @@ export default function AdminPage() {
 
   const handleSave = (product: Product) => {
     try {
-      let ok = false;
       if (editing?.id) {
-        ok = updateProduct(product.id, product);
+        updateProduct(product.id, product);
       } else {
-        ok = addProduct(product);
+        addProduct(product);
       }
-      if (ok) {
-        toast({ title: editing?.id ? "Updated" : "Added", description: `"${product.name}" has been ${editing?.id ? "updated" : "added"}.` });
-        setEditing(null);
-        setAdding(false);
-        refresh();
-      } else {
-        toast({ title: "Storage full", description: "Image is too large. Try a smaller image (under 1MB)." });
-      }
+      // Always refresh local state from store (regardless of localStorage result)
+      refresh();
+      toast({ title: editing?.id ? "Updated" : "Added", description: `"${product.name}" has been ${editing?.id ? "updated" : "added"}.` });
+      setEditing(null);
+      setAdding(false);
     } catch (err) {
       console.error("[Admin] Save failed:", err);
-      toast({ title: "Error", description: "Failed to save product." });
+      toast({ title: "Error", description: "Failed to save product. Check console for details." });
     }
   };
 
@@ -1058,12 +1077,12 @@ export default function AdminPage() {
             {/* Toolbar */}
             <div className="flex items-center gap-3 mb-6">
               <div className="relative flex-1">
-                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                <Search size={16} className="absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
                 <input
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search products..."
-                  className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-border bg-card text-sm outline-none focus:border-primary transition-colors"
+                  className="w-full ps-9 pe-4 py-2.5 rounded-xl border border-border bg-card text-sm outline-none focus:border-primary transition-colors"
                 />
               </div>
               <button
@@ -1171,8 +1190,34 @@ export default function AdminPage() {
             <div>
               <h2 className="text-lg font-bold text-foreground mb-1">Homepage Settings</h2>
               <p className="text-sm text-muted-foreground">
-                Manage the floating biscuit images in the hero section.
+                Manage the hero banner and floating biscuit images.
               </p>
+            </div>
+
+            <div className="bg-card border border-border rounded-2xl p-6 space-y-6">
+              <h3 className="font-semibold text-sm text-foreground">Homepage Hero Banner</h3>
+              <p className="text-xs text-muted-foreground">
+                Upload a custom hero banner image for the homepage. Leave empty to show the default.
+              </p>
+              {siteSettings.heroImageUrl && (
+                <div className="relative group w-full max-w-md rounded-xl border border-border overflow-hidden bg-muted">
+                  <img src={siteSettings.heroImageUrl} alt="Hero banner" className="w-full h-40 object-cover" />
+                  <button
+                    onClick={() => setSiteSettings((s) => ({ ...s, heroImageUrl: "" }))}
+                    className="absolute top-2 end-2 p-1.5 rounded-lg bg-red-500 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
+                    title="Remove hero image"
+                  >
+                    <Trash2 size={14} />
+                  </button>
+                </div>
+              )}
+              <ImageUpload
+                label=""
+                value=""
+                onChange={(url) => {
+                  if (url) setSiteSettings((s) => ({ ...s, heroImageUrl: url }));
+                }}
+              />
             </div>
 
             <div className="bg-card border border-border rounded-2xl p-6 space-y-6">
@@ -1205,12 +1250,12 @@ export default function AdminPage() {
                               floatingImageUrls: s.floatingImageUrls.filter((_, i) => i !== idx),
                             }));
                           }}
-                          className="absolute top-1.5 right-1.5 p-1 rounded-lg bg-red-500 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
+                           className="absolute top-1.5 end-1.5 p-1 rounded-lg bg-red-500 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
                           title="Remove image"
                         >
                           <Trash2 size={12} />
                         </button>
-                        <span className="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-background/80 text-[9px] font-medium text-muted-foreground">
+                        <span className="absolute bottom-1 start-1 px-1.5 py-0.5 rounded bg-background/80 text-[9px] font-medium text-muted-foreground">
                           #{idx + 1}
                         </span>
                       </div>
@@ -1310,7 +1355,7 @@ export default function AdminPage() {
                         <p className="text-sm font-semibold text-foreground truncate">{fav.name}</p>
                         <p className="text-xs text-muted-foreground">{fav.category}</p>
                       </div>
-                      <div className="text-right flex-shrink-0">
+                       <div className="text-end flex-shrink-0">
                         <p className="text-sm font-bold text-foreground">{fav.count}</p>
                         <p className="text-[10px] text-muted-foreground">favorites</p>
                       </div>
@@ -1439,7 +1484,7 @@ export default function AdminPage() {
                           {offer.originalPrice && offer.offerPrice && (
                             <span className="text-[10px] font-semibold">
                               <span className="line-through text-muted-foreground">${offer.originalPrice}</span>
-                              <span className="text-[#E31837] ml-1">${offer.offerPrice}</span>
+                              <span className="text-[#E31837] ms-1">${offer.offerPrice}</span>
                             </span>
                           )}
                           {offer.type === "bundle" && offer.bundleItems.length > 0 && (

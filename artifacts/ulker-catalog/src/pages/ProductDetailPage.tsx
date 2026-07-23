@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ChevronDown, ChevronUp, Package, Info, Leaf, AlertTriangle, Share2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { getProductById, getRelatedProducts } from "@/data/admin-store";
 import { resolveImageUrl } from "@/lib/utils";
 import { shareProduct } from "@/lib/share";
@@ -60,6 +61,8 @@ export default function ProductDetailPage() {
   const params = useParams<{ id: string }>();
   const product = getProductById(params.id ?? "");
   const related = product ? getRelatedProducts(product) : [];
+  const { i18n } = useTranslation();
+  const displayName = product ? (i18n.language === "ar" && product.nameAr ? product.nameAr : product.name) : "";
 
   if (!product) {
     return (
@@ -73,7 +76,7 @@ export default function ProductDetailPage() {
   }
 
   return (
-    <div className="min-h-screen pt-20 pb-20 lg:pb-0" data-testid="page-product-detail">
+    <div className="min-h-screen pt-20 pb-24 lg:pb-0" data-testid="page-product-detail">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
@@ -86,7 +89,7 @@ export default function ProductDetailPage() {
           <span>/</span>
           <span className="text-muted-foreground">{product.category}</span>
           <span>/</span>
-          <span className="text-foreground font-medium truncate">{product.name}</span>
+          <span className="text-foreground font-medium truncate">{displayName}</span>
         </div>
 
         {/* Main layout */}
@@ -145,7 +148,7 @@ export default function ProductDetailPage() {
                 </span>
               )}
               <h1 className="text-xl font-black text-foreground mb-2" data-testid="text-product-detail-name">
-                {product.name}
+                {displayName}
               </h1>
               <p className="text-sm text-muted-foreground leading-relaxed mb-4">{product.shortDescription}</p>
               <button
@@ -203,7 +206,7 @@ export default function ProductDetailPage() {
                 ].map(({ label, value, unit }, i) => (
                   <div
                     key={label}
-                    className={`flex justify-between py-1.5 text-sm ${i < 2 ? "font-semibold" : ""} ${label === "Saturated Fat" || label === "Sugar" ? "pl-4 text-muted-foreground" : ""}`}
+                    className={`flex justify-between py-1.5 text-sm ${i < 2 ? "font-semibold" : ""} ${label === "Saturated Fat" || label === "Sugar" ? "ps-4 text-muted-foreground" : ""}`}
                     data-testid={`text-nutrition-${label.toLowerCase().replace(/\s+/g, "-")}`}
                   >
                     <span className={`${i < 2 ? "text-foreground" : "text-muted-foreground"}`}>{label}</span>

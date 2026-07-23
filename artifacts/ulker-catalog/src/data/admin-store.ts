@@ -11,10 +11,12 @@ const SETTINGS_KEY = "ulker-admin-settings";
 
 export interface SiteSettings {
   floatingImageUrls: string[];
+  heroImageUrl: string;
 }
 
 const defaultSettings: SiteSettings = {
   floatingImageUrls: [],
+  heroImageUrl: "",
 };
 
 // --- Server-backed persistence (Vite dev server saves JSON files to disk) ---
@@ -49,8 +51,9 @@ function loadOverrides(): Product[] {
 }
 
 function saveOverrides(overrides: Product[]): boolean {
+  const serialized = JSON.stringify(overrides);
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(overrides));
+    localStorage.setItem(STORAGE_KEY, serialized);
     pushAdminData({
       overrides,
       deletedIds: loadDeletedIds(),
@@ -58,7 +61,23 @@ function saveOverrides(overrides: Product[]): boolean {
     });
     return true;
   } catch (err) {
-    console.error("[AdminStore] Failed to save products:", err);
+    console.error("[AdminStore] localStorage write failed, attempting recovery:", err);
+    // Quota exceeded — strip base64 data URLs from images and retry
+    if (serialized.length > 5 * 1024 * 1024 || err instanceof DOMException) {
+      const stripped = overrides.map((p) => ({
+        ...p,
+        imageUrl: p.imageUrl.startsWith("data:")
+          ? p.imageUrl.slice(0, 100) + "...[stripped]"
+          : p.imageUrl,
+      }));
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(stripped));
+        pushAdminData({ overrides: stripped, deletedIds: loadDeletedIds(), settings: getSettings() });
+        return true;
+      } catch {
+        console.error("[AdminStore] Recovery save also failed");
+      }
+    }
     return false;
   }
 }
@@ -157,7 +176,13 @@ export function getProductById(id: string): Product | undefined {
 
 export function addProduct(product: Product): boolean {
   const overrides = loadOverrides();
-  overrides.push(product);
+  // Prevent duplicate IDs — update existing instead of pushing a duplicate
+  const existingIdx = overrides.findIndex((p) => p.id === product.id);
+  if (existingIdx >= 0) {
+    overrides[existingIdx] = product;
+  } else {
+    overrides.push(product);
+  }
   return saveOverrides(overrides);
 }
 
@@ -219,7 +244,9 @@ export interface Offer {
   id: string;
   type: "bundle" | "discount";
   title: string;
+  titleAr: string;
   description: string;
+  descriptionAr: string;
   images: string[];
   coverIndex: number;
   bundleItems: BundleItem[];
@@ -241,7 +268,9 @@ function migrateOffer(o: any): Offer {
     id: o.id ?? "",
     type: o.type ?? "discount",
     title: o.title ?? "",
+    titleAr: o.titleAr ?? "",
     description: o.description ?? "",
+    descriptionAr: o.descriptionAr ?? "",
     images,
     coverIndex: o.coverIndex ?? 0,
     bundleItems: o.bundleItems ?? [],

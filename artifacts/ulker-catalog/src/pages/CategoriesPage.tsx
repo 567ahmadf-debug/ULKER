@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, Cookie, Layers, Coffee, Cake, Wheat, Star, Package, Candy } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { categoryData } from "@/data/categories";
 import { getAllProducts, getProductsByCategory } from "@/data/admin-store";
 import { resolveImageUrl } from "@/lib/utils";
@@ -9,8 +10,9 @@ import Footer from "@/components/layout/Footer";
 const icons = [Cookie, Layers, Wheat, Coffee, Cake, Layers, Candy, Package];
 
 export default function CategoriesPage() {
+  const { i18n } = useTranslation();
   return (
-    <div className="min-h-screen pt-20 pb-20 lg:pb-0" data-testid="page-categories">
+    <div className="min-h-screen pt-20 pb-24 lg:pb-0" data-testid="page-categories">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -73,13 +75,13 @@ export default function CategoriesPage() {
                         <div className="aspect-square bg-muted overflow-hidden">
                           <img
                             src={resolveImageUrl(product.imageUrl)}
-                            alt={product.name}
+                            alt={i18n.language === "ar" && product.nameAr ? product.nameAr : product.name}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-400"
                             loading="lazy"
                           />
                         </div>
                         <div className="p-3">
-                          <p className="text-sm font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">{product.name}</p>
+                          <p className="text-sm font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">{i18n.language === "ar" && product.nameAr ? product.nameAr : product.name}</p>
                           <p className="text-xs text-muted-foreground mt-0.5">{product.packaging.weight}</p>
                         </div>
                       </motion.span>

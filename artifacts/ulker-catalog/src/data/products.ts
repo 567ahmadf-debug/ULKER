@@ -3,6 +3,7 @@ export type StockStatus = "in_stock" | "limited" | "out_of_stock";
 export interface Product {
   id: string;
   name: string;
+  nameAr: string;
   category: string;
   description: string;
   shortDescription: string;
@@ -49,6 +50,7 @@ export const products: Product[] = [
   {
     id: "petibor-classic",
     name: "Ülker Petibör",
+    nameAr: "بتي بور أويلكر",
     category: "Biscuits",
     shortDescription: "The iconic classic biscuit, loved for generations. Simple, satisfying, and perfectly balanced.",
     description: "Ülker Petibör is Turkey's most beloved biscuit — a timeless staple in every household. Baked to a golden perfection with a delicate buttery flavor and a gentle crunch, Petibör has been a trusted companion at breakfast tables and tea times since 1944.",
@@ -100,6 +102,7 @@ export const products: Product[] = [
   {
     id: "albeni-bar",
     name: "Albeni Bar",
+    nameAr: "ألبيني بار",
     category: "Chocolate",
     shortDescription: "Caramel biscuit bar coated in rich milk chocolate. A premium indulgence in every bite.",
     description: "Albeni is Ülker's premium chocolate bar — a harmonious layering of crunchy biscuit, smooth caramel, and velvety milk chocolate. Each bar is individually wrapped for freshness and designed to deliver a luxurious snacking experience.",
@@ -151,6 +154,7 @@ export const products: Product[] = [
   {
     id: "halley",
     name: "Halley",
+    nameAr: "هالي",
     category: "Biscuits",
     shortDescription: "Sandwich biscuit with marshmallow filling, coated in chocolate. A childhood favourite.",
     description: "Halley stands as one of Ülker's most iconic creations — a signature sandwich biscuit filled with soft marshmallow and enrobed in a glossy chocolate coating. Uniquely indulgent yet approachable for all ages.",
@@ -202,6 +206,7 @@ export const products: Product[] = [
   {
     id: "dido",
     name: "Dido",
+    nameAr: "ديدو",
     category: "Wafer",
     shortDescription: "Multi-layer wafer with hazelnut cream, coated in milk chocolate. Pure elegance.",
     description: "Dido is Ülker's premium wafer — a sophisticated combination of thin, crispy wafer layers filled with rich hazelnut cream and enrobed in high-quality milk chocolate. Each piece delivers a complex, satisfying bite.",
@@ -253,6 +258,7 @@ export const products: Product[] = [
   {
     id: "hanımeller",
     name: "Hanımeller",
+    nameAr: "حنيمالر",
     category: "Biscuits",
     shortDescription: "Delicate ring-shaped biscuits with a light coconut aroma. An elegant everyday biscuit.",
     description: "Hanımeller is a refined, ring-shaped biscuit with a distinctly light texture and a gentle coconut fragrance. Associated with elegance and hospitality, it has graced Turkish tea tables for decades.",
@@ -304,6 +310,7 @@ export const products: Product[] = [
   {
     id: "cokoprens",
     name: "Çokoprens",
+    nameAr: "كوكو بريمس",
     category: "Biscuits",
     shortDescription: "Chocolate sandwich biscuit with cocoa cream filling. A bold, chocolatey indulgence.",
     description: "Çokoprens is Ülker's double-hit of chocolate — a dark cocoa biscuit sandwich with a rich cocoa cream filling. Bold, intense, and satisfying for true chocolate lovers.",
@@ -355,6 +362,7 @@ export const products: Product[] = [
   {
     id: "ulker-dark-choc",
     name: "Ülker Dark Chocolate 70%",
+    nameAr: "شوكولادة أولكر الداكنة 70%",
     category: "Chocolate",
     shortDescription: "Premium 70% dark chocolate tablet. Intense, sophisticated, and pure.",
     description: "Crafted for the discerning palate, Ülker's 70% Dark Chocolate tablet is made with carefully selected cocoa beans and features a deep, complex flavour profile with subtle fruity notes and a long, satisfying finish.",
@@ -406,6 +414,7 @@ export const products: Product[] = [
   {
     id: "alpella",
     name: "Alpella",
+    nameAr: "ألبيلا",
     category: "Chocolate",
     shortDescription: "Airy, layered chocolate wafer bar with a light hazelnut cream. A classic icon.",
     description: "Alpella is Ülker's celebrated airy chocolate bar — a delicate wafer structure filled with smooth hazelnut cream and coated in milk chocolate. Generations have enjoyed its distinctive light, melt-away experience.",
@@ -457,6 +466,7 @@ export const products: Product[] = [
   {
     id: "caramel-twist",
     name: "Caramel Twist",
+    nameAr: "كاراميل تويست",
     category: "Chocolate",
     shortDescription: "Soft caramel swirl coated in smooth milk chocolate. Decadent and luxurious.",
     description: "Caramel Twist is Ülker's answer to premium caramel confectionery — a soft, chewy caramel centre with subtle salted notes, wrapped in silky milk chocolate. Each piece is a small luxury.",
@@ -508,6 +518,7 @@ export const products: Product[] = [
   {
     id: "biskrem",
     name: "Biskrem",
+    nameAr: "بيسكريم",
     category: "Wafer",
     shortDescription: "Crispy wafer filled with rich hazelnut cream. Simple perfection.",
     description: "Biskrem is Ülker's classic hazelnut cream wafer — a straightforward yet deeply satisfying combination of crisp wafer sheets and smooth hazelnut paste. A perennial favourite in the wafer category.",
@@ -559,6 +570,7 @@ export const products: Product[] = [
   {
     id: "kremali-gofret",
     name: "Kremalı Gofret",
+    nameAr: "كريلي جوفريت",
     category: "Wafer",
     shortDescription: "Classic cream-filled wafer. Light, crispy, and irresistibly snackable.",
     description: "Kremalı Gofret is the quintessential Turkish wafer — a multi-layer crispy wafer filled with a light, airy vanilla cream. Universally loved and unmistakably Ülker.",
@@ -610,6 +622,7 @@ export const products: Product[] = [
   {
     id: "cokoprens-wafer",
     name: "Çokokrem Wafer",
+    nameAr: "كوكو كريم ويفر",
     category: "Wafer",
     shortDescription: "Chocolate cream wafer with a rich cocoa filling. Bold meets crisp.",
     description: "Çokokrem Wafer delivers a punchy cocoa experience — layers of crisp wafer filled with a thick, bold chocolate cream. For those who prefer their wafer experience unapologetically chocolatey.",
@@ -661,6 +674,7 @@ export const products: Product[] = [
   {
     id: "altin-bisküvi",
     name: "Altın Bisküvi",
+    nameAr: "ألتين بسكوفي",
     category: "Cookies",
     shortDescription: "Golden butter cookies with a rich, indulgent flavour. Premium everyday cookies.",
     description: "Altın Bisküvi (Golden Biscuit) is Ülker's premium butter cookie — made with a higher proportion of real butter for a noticeably richer, more indulgent flavour profile. A step above the everyday.",
@@ -712,6 +726,7 @@ export const products: Product[] = [
   {
     id: "yulaflı-bisküvi",
     name: "Yulaflı Bisküvi",
+    nameAr: "يولافي بسكوفي",
     category: "Cookies",
     shortDescription: "Hearty oat cookies with a wholesome, nutty character. Nutritious and satisfying.",
     description: "Ülker's Yulaflı Bisküvi (Oat Cookie) brings wholesome nutrition together with genuine taste. Made with rolled oats and a touch of honey, it's the snack that doesn't compromise on either front.",
@@ -763,6 +778,7 @@ export const products: Product[] = [
   {
     id: "ulker-cake",
     name: "Ülker Kek",
+    nameAr: "ولكر كيك",
     category: "Cake",
     shortDescription: "Soft, moist individual cake with a golden crust. A classic homestyle bake.",
     description: "Ülker Kek brings the warmth of home baking to a convenient individual format. Each golden cake is soft, moist, and perfectly portioned — ideal for any moment that calls for a gentle treat.",
@@ -814,6 +830,7 @@ export const products: Product[] = [
   {
     id: "rulo-pasta",
     name: "Rulo Pasta",
+    nameAr: "رولو باستا",
     category: "Cake",
     shortDescription: "Swiss roll cake with chocolate cream filling. Light, elegant, and irresistible.",
     description: "Rulo Pasta is Ülker's beloved Swiss roll — a light sponge cake tightly rolled around a smooth chocolate cream filling. Its elegant spiral cross-section makes it as visually appealing as it is delicious.",
@@ -865,6 +882,7 @@ export const products: Product[] = [
   {
     id: "cedar-kraker",
     name: "Çedar Kraker",
+    nameAr: "سيدار كراكر",
     category: "Crackers",
     shortDescription: "Thin, airy crackers with a bold cheddar flavour. A savoury crowd-pleaser.",
     description: "Çedar Kraker delivers an intense, mature cheddar flavour on a thin, uniformly baked cracker. Baked not fried, with a satisfying snap and a lingering savoury finish.",
@@ -916,6 +934,7 @@ export const products: Product[] = [
   {
     id: "simit-kraker",
     name: "Simit Kraker",
+    nameAr: "سيمت كراكر",
     category: "Crackers",
     shortDescription: "Sesame-coated ring crackers inspired by the iconic Turkish simit. Authentic and addictive.",
     description: "Simit Kraker takes inspiration from Turkey's beloved street bread — the simit — and translates it into a light, snackable cracker ring generously coated in golden sesame seeds.",
@@ -967,6 +986,7 @@ export const products: Product[] = [
   {
     id: "yupi",
     name: "Yupi",
+    nameAr: "يوبي",
     category: "Candy",
     shortDescription: "Fun-shaped gummy candies in vibrant fruit flavours. A playful, colourful delight.",
     description: "Yupi brings joy in every piece — brightly coloured gummy candies in playful shapes and tropical fruit flavours. A favourite with children and the young at heart.",
@@ -1018,6 +1038,7 @@ export const products: Product[] = [
   {
     id: "cici",
     name: "Cici",
+    nameAr: "سيسي",
     category: "Candy",
     shortDescription: "Chewy fruit-flavoured candy rolls. Tangy, colourful, and endlessly fun.",
     description: "Cici is the colourful, tangy fruit candy that has entertained generations of Ülker fans. Each roll delivers a burst of fruit flavour in a satisfyingly chewy format.",
@@ -1069,6 +1090,7 @@ export const products: Product[] = [
   {
     id: "dore",
     name: "Dore Kraker",
+    nameAr: "دوري كراكر",
     category: "Snacks",
     shortDescription: "Crunchy baked snack crackers with a light, airy texture. A grown-up snack.",
     description: "Dore is Ülker's premium snack cracker — baked until golden and light, with a delicate seasoning that satisfies savoury cravings without heaviness. Ideal for mindful snacking.",
@@ -1120,6 +1142,7 @@ export const products: Product[] = [
   {
     id: "börekçi",
     name: "Börekçi",
+    nameAr: "بوريكجي",
     category: "Snacks",
     shortDescription: "Savoury pastry-flavoured crackers with cheese. Inspired by Turkish börek tradition.",
     description: "Börekçi draws from the rich tradition of Turkish börek — flaky, cheese-filled pastry — and delivers that beloved flavour in a modern snack cracker format. Distinctive, savoury, and deeply satisfying.",

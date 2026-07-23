@@ -6,6 +6,7 @@ const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif", "image/svg+xml"];
 const MAX_WIDTH = 400;
 const MAX_HEIGHT = 400;
+const JPEG_QUALITY = 0.7;
 
 interface ImageUploadProps {
   value: string;
@@ -31,7 +32,8 @@ function resizeImage(file: File): Promise<string> {
       const ctx = canvas.getContext("2d");
       if (!ctx) { reject(new Error("Canvas error")); return; }
       ctx.drawImage(img, 0, 0, width, height);
-      resolve(canvas.toDataURL(file.type || "image/png"));
+      const outputType = file.type === "image/png" ? "image/png" : "image/jpeg";
+      resolve(canvas.toDataURL(outputType, JPEG_QUALITY));
     };
     img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("Load error")); };
     img.src = url;
