@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ArrowRight, Star, Share2 } from "lucide-react";
+import { ArrowRight, Heart } from "lucide-react";
 import { Product } from "@/data/products";
-import StockStatus from "./StockStatus";
 import { useTranslation } from "react-i18next";
 import { getMyFavorites, toggleFavorite } from "@/data/admin-store";
 import { resolveImageUrl } from "@/lib/utils";
@@ -18,9 +17,6 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const { t } = useTranslation();
   const [isFav, setIsFav] = useState(() => getMyFavorites().includes(product.id));
 
-  const floatDuration = 5 + (((index * 7 + 3) % 20) / 10);
-  const floatDelay = ((index * 1.3) % 3).toFixed(1);
-
   const handleToggleFav = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -34,98 +30,83 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
     shareProduct(product);
   };
 
+  const stockDotClass =
+    product.stockStatus === "in_stock"
+      ? "bg-tertiary"
+      : product.stockStatus === "limited"
+        ? "bg-amber-500"
+        : "bg-destructive";
+
+  const stockLabel =
+    product.stockStatus === "in_stock"
+      ? "In Stock"
+      : product.stockStatus === "limited"
+        ? "Limited Stock"
+        : "Out of Stock";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.05 }}
       data-testid={`card-product-${product.id}`}
-      className="group bg-card border border-card-border rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+      className="bg-card border border-border rounded-2xl p-5 shadow-sm flex flex-col gap-4 relative group hover:shadow-md transition-shadow"
     >
+      {/* Badges */}
+      <div className="absolute top-5 left-5 z-10 flex gap-1.5">
+        {product.isNew && (
+          <span className="bg-destructive text-primary-foreground text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+            New
+          </span>
+        )}
+        {product.isPopular && !product.isNew && (
+          <span className="bg-amber-500 text-primary-foreground text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+            Popular
+          </span>
+        )}
+      </div>
+
+      {/* Favorite button */}
+      <button
+        type="button"
+        onClick={handleToggleFav}
+        className="absolute top-5 right-5 z-10 w-9 h-9 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center text-muted-foreground hover:text-destructive transition-colors"
+        aria-label={isFav ? "Remove from favorites" : "Add to favorites"}
+      >
+        <Heart size={16} className={isFav ? "text-destructive fill-destructive" : ""} />
+      </button>
+
       {/* Image */}
-      <div className="relative aspect-square bg-[#FAFAFA] dark:bg-muted overflow-hidden">
+      <div className="w-full aspect-[16/10] rounded-xl overflow-hidden bg-secondary/30">
         <img
           src={resolveImageUrl(product.imageUrl)}
           alt={product.name}
           loading="lazy"
-          className="absolute inset-0 m-auto w-[calc(100%-2rem)] h-[calc(100%-2rem)] object-contain z-[1]
-            transition-all duration-300 ease-in-out will-change-transform
-            group-hover:scale-[1.06] group-hover:brightness-110
-            group-hover:[animation-play-state:paused]"
-          style={{
-            animation: `product-float ${floatDuration}s ease-in-out ${floatDelay}s infinite`,
-          }}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
-
-        <div
-          className="absolute bottom-6 left-1/2 w-[55%] h-[8px] rounded-[50%] bg-black/10
-            blur-[6px] z-0
-            transition-all duration-300 ease-in-out
-            group-hover:bg-black/18 group-hover:blur-[10px]
-            group-hover:[animation-play-state:paused]"
-          style={{
-            animation: `product-shadow ${floatDuration}s ease-in-out ${floatDelay}s infinite`,
-          }}
-        />
-
-        {/* Badges */}
-        <div className="absolute top-3 left-3 rtl:left-auto rtl:right-3 flex flex-col gap-1.5 z-10">
-          {product.isNew && (
-            <span className="px-2 py-0.5 rounded-full bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-wider">
-              {t("products.new_badge")}
-            </span>
-          )}
-          {product.isPopular && !product.isNew && (
-            <span className="px-2 py-0.5 rounded-full bg-accent text-accent-foreground text-[10px] font-bold uppercase tracking-wider">
-              {t("products.popular_badge")}
-            </span>
-          )}
-        </div>
       </div>
 
-      {/* Content */}
-      <div className="p-4">
-        {/* Action buttons row */}
-        <div className="flex items-center justify-end gap-1 mb-2 -mt-1">
-          <button
-            type="button"
-            onClick={handleShare}
-            className="p-2 rounded-lg hover:bg-muted active:bg-muted transition-colors"
-            aria-label="Share product"
-          >
-            <Share2 size={15} className="text-muted-foreground" />
-          </button>
-          <button
-            type="button"
-            onClick={handleToggleFav}
-            className="p-2 rounded-lg hover:bg-muted active:bg-muted transition-colors"
-            aria-label={isFav ? "Remove from favorites" : "Add to favorites"}
-          >
-            <Star
-              size={15}
-              className={isFav ? "text-amber-400 fill-amber-400" : "text-muted-foreground"}
-            />
-          </button>
-        </div>
+      {/* Info */}
+      <div className="flex flex-col gap-1">
+        <h3
+          data-testid={`text-product-name-${product.id}`}
+          className="font-bold text-lg text-primary font-heading"
+        >
+          {product.name}
+        </h3>
+        <p className="text-sm text-muted-foreground line-clamp-1">{product.shortDescription}</p>
+      </div>
 
-        <div className="mb-2">
-          <p className="text-xs font-medium text-muted-foreground mb-1">{product.category}</p>
-          <h3
-            data-testid={`text-product-name-${product.id}`}
-            className="text-sm font-bold text-foreground leading-tight line-clamp-2"
-          >
-            {product.name}
-          </h3>
+      {/* Stock status + actions */}
+      <div className="flex items-center justify-between pt-3 border-t border-border/60">
+        <div className="flex items-center gap-1.5 text-sm font-semibold text-tertiary">
+          <span className={`w-2.5 h-2.5 rounded-full ${stockDotClass}`} />
+          <span>{stockLabel}</span>
         </div>
-
-        <div className="mt-3 mb-4">
-          <StockStatus status={product.stockStatus} size="sm" />
-        </div>
-
         <Link href={`/products/${product.id}`} data-testid={`link-view-details-${product.id}`}>
-          <span className="flex items-center justify-between w-full px-4 py-2.5 rounded-xl bg-primary/8 hover:bg-primary hover:text-primary-foreground text-primary text-sm font-semibold transition-all duration-200 cursor-pointer group/btn">
-            <span>{t("products.view_details")}</span>
-            <ArrowRight size={14} className="transition-transform duration-200 group-hover/btn:translate-x-1 rtl:rotate-180 rtl:group-hover/btn:-translate-x-1 rtl:group-hover/btn:translate-x-0" />
+          <span className="text-sm font-bold text-primary flex items-center gap-1 hover:underline cursor-pointer">
+            <span>View Details</span>
+            <ArrowRight size={14} />
           </span>
         </Link>
       </div>

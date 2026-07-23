@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Screen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:wght@100..900&family=Fira+Code:wght@300..700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <style type="text/tailwindcss">
+      @import "tailwindcss";
+      @theme inline {
+        --color-background: var(--background);
+        --color-foreground: var(--foreground);
+        --color-primary: var(--primary);
+        --color-primary-foreground: var(--primary-foreground);
+        --color-secondary: var(--secondary);
+        --color-secondary-foreground: var(--secondary-foreground);
+        --color-tertiary: var(--tertiary);
+        --color-muted: var(--muted);
+        --color-muted-foreground: var(--muted-foreground);
+        --color-accent: var(--accent);
+        --color-destructive: var(--destructive);
+        --color-card: var(--card);
+        --color-card-foreground: var(--card-foreground);
+        --color-border: var(--border);
+        --color-input: var(--input);
+        --color-ring: var(--ring);
+        --radius-sm: calc(var(--radius) - 4px);
+        --radius-md: calc(var(--radius) - 2px);
+        --radius-lg: var(--radius);
+        --font-family-sans: var(--font-sans);
+        --font-family-heading: var(--font-heading);
+        --font-family-mono: var(--font-mono);
+      }
+      :root {
+        --background: #F8FAFC;
+        --foreground: #0F172A;
+        --primary: #1E293B;
+        --primary-foreground: #FFFFFF;
+        --secondary: #F1F5F9;
+        --secondary-foreground: #1E293B;
+        --tertiary: #10B981;
+        --muted: #F1F5F9;
+        --muted-foreground: #64748B;
+        --accent: #D5D9DD;
+        --accent-foreground: #0F172A;
+        --card: #FFFFFF;
+        --card-foreground: #0F172A;
+        --destructive: #EF4444;
+        --border: #E2E8F0;
+        --input: #E2E8F0;
+        --ring: #1E293B;
+        --radius: 0.75rem;
+        --font-sans: Inter,sans-serif;
+        --font-heading: Inter,sans-serif;
+        --font-mono: JetBrains Mono, monospace;
+        --shadow-offset-x: 0;
+        --shadow-offset-y: 10;
+        --shadow-blur: 30;
+        --shadow-spread: -8;
+        --shadow-color: rgba(15, 23, 42, 0.12);
+        }
+    </style>
+    <style>
+      .brand-gradient { background-image: linear-gradient(135deg, var(--primary), var(--accent)); }
+      .shadow-theme {
+        box-shadow:
+          calc(var(--shadow-offset-x, 0) * 1px) calc(var(--shadow-offset-y, 10) * 1px)
+          calc(var(--shadow-blur, 30) * 1px) calc(var(--shadow-spread, -8) * 1px)
+          var(--shadow-color, rgba(15, 23, 42, 0.12));
+      }
+    </style>
+  </head>
+  <body>
+<div class="min-h-screen w-full bg-background flex flex-col relative pb-20 font-sans text-foreground">
+  <!-- Top Navigation Header -->
+  <header class="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span class="text-2xl font-bold tracking-wider text-primary font-heading uppercase">Ülker</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <button class="flex items-center gap-1 px-3 py-1.5 rounded-full border border-border text-sm font-medium hover:bg-secondary transition-colors">
+        <iconify-icon icon="lucide:globe" class="text-base text-muted-foreground"></iconify-icon>
+        <span>EN</span>
+      </button>
+      <button class="p-2 rounded-full hover:bg-secondary text-muted-foreground transition-colors" aria-label="Toggle theme">
+        <iconify-icon icon="lucide:moon" class="text-xl"></iconify-icon>
+      </button>
+      <button class="p-2 rounded-full hover:bg-secondary text-foreground transition-colors" aria-label="Open menu">
+        <iconify-icon icon="lucide:menu" class="text-xl"></iconify-icon>
+      </button>
+    </div>
+  </header>
+
+  <!-- Title & Subtitle Section with Basket Graphic -->
+  <section class="px-4 pt-5 pb-4 flex items-center justify-between gap-4 bg-gradient-to-b from-secondary/30 to-background">
+    <div class="flex flex-col gap-1">
+      <h1 class="text-2xl font-bold font-heading text-primary">All Products</h1>
+      <p class="text-xs text-muted-foreground">Discover our delicious range of products.</p>
+      <span class="text-xs font-semibold text-primary mt-1">10 products found</span>
+    </div>
+    <div class="w-20 h-20 bg-secondary/80 rounded-2xl border border-border flex items-center justify-center relative overflow-hidden">
+      <iconify-icon icon="lucide:shopping-cart" class="text-3xl text-primary/80"></iconify-icon>
+      <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-tertiary rounded-full flex items-center justify-center text-[10px] text-primary-foreground font-bold">10</div>
+    </div>
+  </section>
+
+  <!-- Search and Sort Section -->
+  <section class="px-4 py-2 flex flex-col gap-3">
+    <div class="flex items-center gap-2">
+      <div class="flex-1 relative">
+        <iconify-icon icon="lucide:search" class="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground text-lg"></iconify-icon>
+        <input type="text" placeholder="Search products, categories..." class="w-full pl-10 pr-4 py-2.5 bg-card border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" />
+      </div>
+      <button class="flex items-center gap-1.5 px-3 py-2.5 bg-card border border-border rounded-xl text-sm font-medium text-foreground hover:bg-secondary transition-colors">
+        <span>Popular</span>
+        <iconify-icon icon="lucide:funnel" class="text-sm text-muted-foreground"></iconify-icon>
+      </button>
+    </div>
+  </section>
+
+  <!-- Horizontal Scrollable Category Chips -->
+  <section class="py-2 flex flex-col gap-1">
+    <div class="flex gap-2 overflow-x-auto px-4 pb-1.5 scrollbar-none">
+      <button class="flex-shrink-0 flex items-center gap-1.5 px-4 py-2 bg-primary text-primary-foreground text-xs font-semibold rounded-full shadow-sm">
+        <iconify-icon icon="lucide:cookie" class="text-sm"></iconify-icon>
+        <span>Biscuits</span>
+      </button>
+      <button class="flex-shrink-0 flex items-center gap-1.5 px-4 py-2 bg-card border border-border text-foreground hover:bg-secondary text-xs font-semibold rounded-full transition-colors">
+        <iconify-icon icon="lucide:image" class="text-sm text-muted-foreground"></iconify-icon>
+        <span>Chocolate</span>
+      </button>
+      <button class="flex-shrink-0 flex items-center gap-1.5 px-4 py-2 bg-card border border-border text-foreground hover:bg-secondary text-xs font-semibold rounded-full transition-colors">
+        <iconify-icon icon="lucide:layers" class="text-sm text-muted-foreground"></iconify-icon>
+        <span>Wafer</span>
+      </button>
+      <button class="flex-shrink-0 flex items-center gap-1.5 px-4 py-2 bg-card border border-border text-foreground hover:bg-secondary text-xs font-semibold rounded-full transition-colors">
+        <iconify-icon icon="lucide:star" class="text-sm text-muted-foreground"></iconify-icon>
+        <span>Cookies</span>
+      </button>
+      <button class="flex-shrink-0 flex items-center gap-1.5 px-4 py-2 bg-card border border-border text-foreground hover:bg-secondary text-xs font-semibold rounded-full transition-colors">
+        <iconify-icon icon="lucide:cake" class="text-sm text-muted-foreground"></iconify-icon>
+        <span>Cake</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Stock Availability Legend Bar -->
+  <section class="px-4 py-1">
+    <div class="bg-card border border-border rounded-xl py-2 px-3 flex items-center justify-between text-[11px] font-semibold text-muted-foreground">
+      <div class="flex items-center gap-1.5">
+        <span class="w-2 h-2 bg-tertiary rounded-full"></span>
+        <span class="text-foreground">In Stock</span>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <span class="w-2 h-2 bg-amber-500 rounded-full"></span>
+        <span class="text-foreground">Limited Stock</span>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <span class="w-2 h-2 bg-destructive rounded-full"></span>
+        <span class="text-foreground">Out of Stock</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Weight Filter Chips -->
+  <section class="px-4 py-2 flex items-center gap-2 overflow-x-auto scrollbar-none">
+    <button class="px-3.5 py-1.5 bg-primary text-primary-foreground text-xs font-bold rounded-lg shadow-sm">All</button>
+    <button class="px-3.5 py-1.5 bg-card border border-border text-foreground hover:bg-secondary text-xs font-semibold rounded-lg transition-colors">&lt;100g</button>
+    <button class="px-3.5 py-1.5 bg-card border border-border text-foreground hover:bg-secondary text-xs font-semibold rounded-lg transition-colors">100-250g</button>
+    <button class="px-3.5 py-1.5 bg-card border border-border text-foreground hover:bg-secondary text-xs font-semibold rounded-lg transition-colors">250g+</button>
+  </section>
+
+  <!-- Product Grid (2 Columns) -->
+  <section class="px-4 py-3">
+    <div class="grid grid-cols-2 gap-3">
+      <!-- Card 1: Albeni Chocolate Bar -->
+      <div class="bg-card border border-border rounded-xl p-3 flex flex-col gap-2 relative hover:shadow-sm transition-shadow">
+        <span class="absolute top-2.5 left-2.5 z-10 bg-amber-500 text-primary-foreground text-[9px] font-bold px-1.5 py-0.5 rounded uppercase">Popular</span>
+        <button class="absolute top-2.5 right-2.5 z-10 w-7 h-7 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center text-muted-foreground hover:text-destructive transition-colors">
+          <iconify-icon icon="lucide:heart" class="text-sm"></iconify-icon>
+        </button>
+        <div class="w-full aspect-square rounded-lg overflow-hidden bg-secondary/30">
+          <img src="https://uxmagic.blob.core.windows.net/public/agent-images/img-albeni-1784801652624-i8u2vdybkvr.png" alt="Albeni Chocolate Bar" class="w-full h-full object-cover" />
+        </div>
+        <div class="flex flex-col gap-0.5">
+          <h3 class="font-bold text-xs text-primary font-heading line-clamp-1">Albeni Chocolate</h3>
+          <p class="text-[10px] text-muted-foreground line-clamp-1">Chocolate Coated Wafer</p>
+        </div>
+        <div class="flex items-center gap-1 text-[10px] text-tertiary font-semibold">
+          <span class="w-1.5 h-1.5 bg-tertiary rounded-full"></span>
+          <span>In Stock</span>
+        </div>
+        <div class="flex items-center justify-between pt-1.5 border-t border-border/50 mt-1">
+          <div class="flex gap-1.5">
+            <button class="text-muted-foreground hover:text-primary"><iconify-icon icon="lucide:share-2" class="text-xs"></iconify-icon></button>
+            <button class="text-muted-foreground hover:text-amber-500"><iconify-icon icon="lucide:star" class="text-xs"></iconify-icon></button>
+          </div>
+          <a href="#details" class="text-[10px] font-bold text-primary flex items-center gap-0.5 hover:underline">
+            <span>Details</span>
+            <iconify-icon icon="lucide:arrow-right" class="text-xs"></iconify-icon>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2: Ülker Halley -->
+      <div class="bg-card border border-border rounded-xl p-3 flex flex-col gap-2 relative hover:shadow-sm transition-shadow">
+        <span class="absolute top-2.5 left-2.5 z-10 bg-amber-500 text-primary-foreground text-[9px] font-bold px-1.5 py-0.5 rounded uppercase">Popular</span>
+        <button class="absolute top-2.5 right-2.5 z-10 w-7 h-7 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center text-muted-foreground hover:text-destructive transition-colors">
+          <iconify-icon icon="lucide:heart" class="text-sm"></iconify-icon>
+        </button>
+        <div class="w-full aspect-square rounded-lg overflow-hidden bg-secondary/30">
+          <img src="https://uxmagic.blob.core.windows.net/public/agent-images/img-halley-1784801643284-k7xo5ycnsy.png" alt="Ülker Halley" class="w-full h-full object-cover" />
+        </div>
+        <div class="flex flex-col gap-0.5">
+          <h3 class="font-bold text-xs text-primary font-heading line-clamp-1">Ülker Halley</h3>
+          <p class="text-[10px] text-muted-foreground line-clamp-1">Marshmallow Biscuit</p>
+        </div>
+        <div class="flex items-center gap-1 text-[10px] text-tertiary font-semibold">
+          <span class="w-1.5 h-1.5 bg-tertiary rounded-full"></span>
+          <span>In Stock</span>
+        </div>
+        <div class="flex items-center justify-between pt-1.5 border-t border-border/50 mt-1">
+          <div class="flex gap-1.5">
+            <button class="text-muted-foreground hover:text-primary"><iconify-icon icon="lucide:share-2" class="text-xs"></iconify-icon></button>
+            <button class="text-muted-foreground hover:text-amber-500"><iconify-icon icon="lucide:star" class="text-xs"></iconify-icon></button>
+          </div>
+          <a href="#details" class="text-[10px] font-bold text-primary flex items-center gap-0.5 hover:underline">
+            <span>Details</span>
+            <iconify-icon icon="lucide:arrow-right" class="text-xs"></iconify-icon>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 3: Kremalı Dark Chocolate -->
+      <div class="bg-card border border-border rounded-xl p-3 flex flex-col gap-2 relative hover:shadow-sm transition-shadow">
+        <span class="absolute top-2.5 left-2.5 z-10 bg-amber-500 text-primary-foreground text-[9px] font-bold px-1.5 py-0.5 rounded uppercase">Popular</span>
+        <button class="absolute top-2.5 right-2.5 z-10 w-7 h-7 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center text-muted-foreground hover:text-destructive transition-colors">
+          <iconify-icon icon="lucide:heart" class="text-sm"></iconify-icon>
+        </button>
+        <div class="w-full aspect-square rounded-lg overflow-hidden bg-secondary/30 flex items-center justify-center">
+          <iconify-icon icon="lucide:image" class="text-4xl text-muted-foreground/40"></iconify-icon>
+        </div>
+        <div class="flex flex-col gap-0.5">
+          <h3 class="font-bold text-xs text-primary font-heading line-clamp-1">Kremalı Dark</h3>
+          <p class="text-[10px] text-muted-foreground line-clamp-1">Rich Cocoa Wafer</p>
+        </div>
+        <div class="flex items-center gap-1 text-[10px] text-tertiary font-semibold">
+          <span class="w-1.5 h-1.5 bg-tertiary rounded-full"></span>
+          <span>In Stock</span>
+        </div>
+        <div class="flex items-center justify-between pt-1.5 border-t border-border/50 mt-1">
+          <div class="flex gap-1.5">
+            <button class="text-muted-foreground hover:text-primary"><iconify-icon icon="lucide:share-2" class="text-xs"></iconify-icon></button>
+            <button class="text-muted-foreground hover:text-amber-500"><iconify-icon icon="lucide:star" class="text-xs"></iconify-icon></button>
+          </div>
+          <a href="#details" class="text-[10px] font-bold text-primary flex items-center gap-0.5 hover:underline">
+            <span>Details</span>
+            <iconify-icon icon="lucide:arrow-right" class="text-xs"></iconify-icon>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 4: Ülker Kek -->
+      <div class="bg-card border border-border rounded-xl p-3 flex flex-col gap-2 relative hover:shadow-sm transition-shadow">
+        <span class="absolute top-2.5 left-2.5 z-10 bg-amber-500 text-primary-foreground text-[9px] font-bold px-1.5 py-0.5 rounded uppercase">Popular</span>
+        <button class="absolute top-2.5 right-2.5 z-10 w-7 h-7 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center text-muted-foreground hover:text-destructive transition-colors">
+          <iconify-icon icon="lucide:heart" class="text-sm"></iconify-icon>
+        </button>
+        <div class="w-full aspect-square rounded-lg overflow-hidden bg-secondary/30 flex items-center justify-center">
+          <iconify-icon icon="lucide:cake" class="text-4xl text-muted-foreground/40"></iconify-icon>
+        </div>
+        <div class="flex flex-col gap-0.5">
+          <h3 class="font-bold text-xs text-primary font-heading line-clamp-1">Ülker Kek</h3>
+          <p class="text-[10px] text-muted-foreground line-clamp-1">Chocolate Cake</p>
+        </div>
+        <div class="flex items-center gap-1 text-[10px] text-tertiary font-semibold">
+          <span class="w-1.5 h-1.5 bg-tertiary rounded-full"></span>
+          <span>In Stock</span>
+        </div>
+        <div class="flex items-center justify-between pt-1.5 border-t border-border/50 mt-1">
+          <div class="flex gap-1.5">
+            <button class="text-muted-foreground hover:text-primary"><iconify-icon icon="lucide:share-2" class="text-xs"></iconify-icon></button>
+            <button class="text-muted-foreground hover:text-amber-500"><iconify-icon icon="lucide:star" class="text-xs"></iconify-icon></button>
+          </div>
+          <a href="#details" class="text-[10px] font-bold text-primary flex items-center gap-0.5 hover:underline">
+            <span>Details</span>
+            <iconify-icon icon="lucide:arrow-right" class="text-xs"></iconify-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom Tab Bar Navigation -->
+  <nav class="absolute bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-t border-border py-2 px-4 flex items-center justify-between">
+    <a href="#home" class="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors">
+      <iconify-icon icon="lucide:house" class="text-xl"></iconify-icon>
+      <span class="text-[10px] font-medium">Home</span>
+    </a>
+    <a href="#products" class="flex flex-col items-center gap-1 text-primary">
+      <iconify-icon icon="lucide:layers" class="text-xl"></iconify-icon>
+      <span class="text-[10px] font-bold">Products</span>
+    </a>
+    <a href="#offers" class="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors">
+      <iconify-icon icon="lucide:tag" class="text-xl"></iconify-icon>
+      <span class="text-[10px] font-medium">Offers</span>
+    </a>
+    <a href="#contact" class="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors">
+      <iconify-icon icon="lucide:phone" class="text-xl"></iconify-icon>
+      <span class="text-[10px] font-medium">Contact</span>
+    </a>
+    <a href="#more" class="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors">
+      <iconify-icon icon="lucide:menu" class="text-xl"></iconify-icon>
+      <span class="text-[10px] font-medium">More</span>
+    </a>
+  </nav>
+</div>
+</body></html>

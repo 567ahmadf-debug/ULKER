@@ -1,105 +1,69 @@
 import { Link } from "wouter";
-import { Mail, MapPin, Phone } from "lucide-react";
 
-const columns = [
-  {
-    title: "Products",
-    links: [
-      { label: "Biscuits", href: "/products?category=Biscuits" },
-      { label: "Chocolate", href: "/products?category=Chocolate" },
-      { label: "Wafer", href: "/products?category=Wafer" },
-      { label: "Cookies", href: "/products?category=Cookies" },
-      { label: "Cakes & Snacks", href: "/products?category=Cake" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About Ülker", href: "/about" },
-      { label: "Quality Standards", href: "/quality" },
-      { label: "Sustainability", href: "/sustainability" },
-      { label: "Innovation", href: "/about" },
-      { label: "Awards", href: "/about" },
-    ],
-  },
-  {
-    title: "Support",
-    links: [
-      { label: "Product Information", href: "/products" },
-      { label: "Allergen Guide", href: "/quality" },
-      { label: "Storage Guidelines", href: "/quality" },
-      { label: "Contact Us", href: "/contact" },
-      { label: "FAQ", href: "/contact" },
-    ],
-  },
+const quickLinks = [
+  { label: "Home", href: "/" },
+  { label: "All Products", href: "/products" },
+  { label: "Categories", href: "/categories" },
+  { label: "Special Offers", href: "/offers" },
+];
+
+const categoryLinks = [
+  { label: "Chocolates", href: "/products?category=Chocolate" },
+  { label: "Biscuits & Cookies", href: "/products?category=Biscuits" },
+  { label: "Wafers & Snacks", href: "/products?category=Wafer" },
+  { label: "Salty Crackers", href: "/products?category=Cookies" },
 ];
 
 export default function Footer() {
   return (
-    <footer className="bg-card border-t border-border mt-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
-          {/* Brand */}
-          <div className="lg:col-span-2">
-            <Link href="/">
-              <span className="text-2xl font-black tracking-tight text-primary cursor-pointer">ÜLKER</span>
-            </Link>
-            <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-xs">
-              Turkey's most trusted confectionery brand since 1944. Bringing joy to every table, every day.
-            </p>
-            <div className="mt-6 space-y-2">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <MapPin size={14} className="text-primary shrink-0" />
-                <span>Kısıklı Mah., Ferah Cad. No:1, Üsküdar, İstanbul</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Phone size={14} className="text-primary shrink-0" />
-                <span>+90 (216) 524 24 24</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Mail size={14} className="text-primary shrink-0" />
-                <span>info@ulker.com.tr</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Links */}
-          {columns.map((col) => (
-            <div key={col.title}>
-              <h4 className="text-xs font-bold tracking-widest uppercase text-foreground mb-4">
-                {col.title}
-              </h4>
-              <ul className="space-y-2.5">
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    <Link href={link.href}>
-                      <span className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
-                        {link.label}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} Ülker Bisküvi Sanayi A.S. All rights reserved.
+    <footer className="bg-primary text-primary-foreground mt-16 border-t border-border">
+      <div className="max-w-7xl mx-auto px-8 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="flex flex-col gap-4">
+          <span className="text-2xl font-bold tracking-wider font-heading uppercase">Ülker</span>
+          <p className="text-sm text-primary-foreground/70">
+            Bringing sweet moments of happiness to families and homes all around the globe.
           </p>
-          <div className="flex items-center gap-6">
-            <span className="text-xs text-muted-foreground hover:text-foreground cursor-pointer transition-colors">
-              Privacy Policy
-            </span>
-            <span className="text-xs text-muted-foreground hover:text-foreground cursor-pointer transition-colors">
-              Cookie Policy
-            </span>
-            <span className="text-xs text-muted-foreground hover:text-foreground cursor-pointer transition-colors">
-              Terms of Use
-            </span>
-          </div>
         </div>
+
+        <div>
+          <h4 className="font-bold text-sm uppercase tracking-wider mb-4">Quick Links</h4>
+          <ul className="flex flex-col gap-2 text-sm text-primary-foreground/70">
+            {quickLinks.map((link) => (
+              <li key={link.label}>
+                <Link href={link.href}>
+                  <span className="hover:text-primary-foreground cursor-pointer">{link.label}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="font-bold text-sm uppercase tracking-wider mb-4">Categories</h4>
+          <ul className="flex flex-col gap-2 text-sm text-primary-foreground/70">
+            {categoryLinks.map((link) => (
+              <li key={link.label}>
+                <Link href={link.href}>
+                  <span className="hover:text-primary-foreground cursor-pointer">{link.label}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="font-bold text-sm uppercase tracking-wider mb-4">Contact Info</h4>
+          <p className="text-sm text-primary-foreground/70 mb-2">
+            Have questions about our products or distribution?
+          </p>
+          <a href="mailto:info@ulker.com" className="text-sm font-semibold underline hover:text-primary-foreground">
+            info@ulker.com
+          </a>
+        </div>
+      </div>
+
+      <div className="border-t border-primary-foreground/10 py-6 text-center text-xs text-primary-foreground/50">
+        &copy; 2026 Ülker Official Product Catalog. All rights reserved.
       </div>
     </footer>
   );
